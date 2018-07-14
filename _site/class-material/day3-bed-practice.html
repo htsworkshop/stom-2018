@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>KOGO HTS Workshop 2018</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/kogo-2018/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/kogo-2018/class-material/day3-bed-practice.html">
+  <link rel="alternate" type="application/rss+xml" title="KOGO HTS Workshop 2018" href="http://localhost:4000/kogo-2018/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/kogo-2018/">KOGO HTS Workshop 2018</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="/kogo-2018/day1/">Day 1</a>
+        <a class="page-link" href="/kogo-2018/day2/">Day 2</a>
+        <a class="page-link" href="/kogo-2018/setup/">Setup</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <article class="post-content">
+    <h3 id="iii-4-working-with-bed-files">III-4. Working with BED files.</h3>
+
+<p>In this part, we will learn how to use BED format files to facilitate region-based interpretation of genomic data.</p>
+
+<ol>
+  <li>The BED format specification is available <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">HERE</a>. While there are many optional columns, here we will focus only on four key fields.
+    <ol>
+      <li>Chromosome name</li>
+      <li>Chromsome start position (inclusive if 0-based, exclusive if 1-based)</li>
+      <li>Chromosome end position  (exclusive if 0-based, inclusive if 1-based)</li>
+      <li>(Optional) Name of the region.</li>
+    </ol>
+  </li>
+  <li><strong>(DIY)</strong> Convert the refFlat.txt.gz file to BED format, using the transcription start and end positions and boundary, and using canonical gene name as the name of the region.
+    <ul>
+      <li>Try using <code class="highlighter-rouge">cut</code> command to extract the columns you want.</li>
+    </ul>
+
+    <pre>
+ $ zcat refFlat.txt.gz | cut -f 3,5,6,1 | less </pre>
+    <ul>
+      <li>Does it conform to BED file format we want? What is the problem?
+      - Use <code class="highlighter-rouge">awk</code> to allow reordering of columns</li>
+    </ul>
+
+    <pre>
+ $ zcat refFlat.txt.gz | awk 'BEGIN {OFS="\t"}; {print($3,$5,$6,$1)}' | less </pre>
+
+    <ul>
+      <li>Does it look better now? Then store the output into a BED file</li>
+    </ul>
+    <pre>
+ $ zcat refFlat.txt.gz | awk 'BEGIN {OFS="\t"}; {print($3,$5,$6,$1)}' &gt; refFlat.bed </pre>
+  </li>
+  <li><strong>(DIY)</strong> Write a <code class="highlighter-rouge">python</code> program that print out lines that overlaps with a region
+    <ul>
+      <li><strong>Given</strong>
+        <ul>
+          <li>Use refFlat.bed produced above as your input file</li>
+          <li>Take three input arguments, (1) chromosome, (2) start, and (3) end position.</li>
+        </ul>
+      </li>
+      <li><strong>Want</strong>
+        <ul>
+          <li>Print the lines overlapping with the specified region.</li>
+          <li>Overlaps can be partial. If any part of the interval overlaps, it is considered overlapping.</li>
+          <li>
+            <p>Example run is shown below</p>
+
+            <pre>
+$ python bed-overlap.py chr20 10000000 10100000
+chr20 	 10004459 	 10200154 	 SNAP25-AS1
+chr20 	 10015646 	 10037410 	 ANKEF1
+chr20 	 10015646 	 10037410 	 ANKEF1
+chr20 	 10015646 	 10037410 	 ANKEF1 </pre>
+          </li>
+          <li>(SPOILER ALERT!) Here is an example skeleton code
+            <pre>  
+import sys
+       
+script, chrom, beg, end = sys.argv  # get arguments from command line
+f = open('refFlat.bed','r')         # read from the input file
+for line in f:			   # iterate over the file by line
+  tok = line.split()		   # tokenize the line by whitespaces (list of size 4)
+## HERE YOU NEED TO PRINT THE LINE ONLY WHEN IT OVERLAPS
+f.close() </pre>
+          </li>
+          <li>To check example solutions, <a href="../class-material/day3-answers.html#write-a-python-program-that-print-out-lines-that-overlaps-with-a-region">CLICK HERE</a></li>
+          <li>Do you think this is an efficient solution to get the answer?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>(DIY)</strong> Alternative way without writing a program is to utilize <code class="highlighter-rouge">tabix</code>.
+    <ul>
+      <li>First, we need to sort the BED file by chromosome and coordinates, and compress it with <code class="highlighter-rouge">bgzip</code>.
+        <pre>
+$ sort -k 1,1 -k 2,2n -k 3,3n refFlat.bed | bgzip -c &gt; refFlat.sorted.bed.gz </pre>
+      </li>
+      <li>Next, we can index the sorted and bgzipped BED file using <code class="highlighter-rouge">tabix</code>.
+        <pre>
+$ tabix -pbed refFlat.sorted.bed.gz </pre>
+      </li>
+      <li>Then you will be able to perform random access of the BED file by region in an efficient way.
+        <pre>
+$ tabix refFlat.sorted.bed.gz chr20:10000000-10100000
+chr20	10004459	10200154	SNAP25-AS1
+chr20	10015646	10037410	ANKEF1
+chr20	10015646	10037410	ANKEF1
+chr20	10015646	10037410	ANKEF1 </pre>
+      </li>
+      <li>If you need to perform this query repeatedly, there will be huge difference in performance in this way, compared to the unsorted version in the way above.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Congratulations! Well done in understanding BED formats.
+<br />
+Now let’s go back to <a href="../day3">Day 3 Overview</a>.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Workshop Instructors</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><a href="https://sph.umich.edu/faculty-profiles/kang-hyunmin.html">Hyun Min Kang</a></li>
+          <li><a href="https://gsbs.uth.edu/faculty/faculty-directory/faculty-profiles.htm?id=88d65672-6183-4972-997c-e7e74598e4ec">Goo Jun</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/htsworkshop">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">htsworkshop</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

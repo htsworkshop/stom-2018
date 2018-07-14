@@ -1,1 +1,9 @@
-theme: jekyll-theme-tactile
+# Site settings
+title: KOGO HTS Workshop 2018
+email: hmkang@umich.edu
+baseurl: "/kogo-2018" # the subpath of your site, e.g. /blog/
+url: "http://htsworkshop.github.io/kogo-2018" 
+github_username:  htsworkshop
+
+# Build settings
+markdown: kramdown

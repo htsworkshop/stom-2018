@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>KOGO HTS Workshop 2018</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/kogo-2018/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/kogo-2018/class-material/unix-reference.html">
+  <link rel="alternate" type="application/rss+xml" title="KOGO HTS Workshop 2018" href="http://localhost:4000/kogo-2018/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/kogo-2018/">KOGO HTS Workshop 2018</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="/kogo-2018/day1/">Day 1</a>
+        <a class="page-link" href="/kogo-2018/day2/">Day 2</a>
+        <a class="page-link" href="/kogo-2018/setup/">Setup</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <article class="post-content">
+    <h2 id="introducing-the-shell"><a href="">Introducing the Shell</a></h2>
+
+<ul>
+  <li>A shell is a program whose primary purpose is to read commands and run other programs.</li>
+  <li>The shell’s main advantages are its high action-to-keystroke ratio,
+its support for automating repetitive tasks,
+and that it can be used to access networked machines.</li>
+  <li>The shell’s main disadvantages are its primarily textual nature
+and how cryptic its commands and operation can be.</li>
+</ul>
+
+<h2 id="files-and-directories"><a href="">Files and Directories</a></h2>
+
+<ul>
+  <li>The file system is responsible for managing information on the disk.</li>
+  <li>Information is stored in files, which are stored in directories (folders).</li>
+  <li>Directories can also store other directories, which forms a directory tree.</li>
+  <li><code class="highlighter-rouge">cd path</code> changes the current working directory.</li>
+  <li><code class="highlighter-rouge">ls path</code> prints a listing of a specific file or directory;
+<code class="highlighter-rouge">ls</code> on its own lists the current working directory.</li>
+  <li><code class="highlighter-rouge">pwd</code> prints the user’s current working directory.</li>
+  <li><code class="highlighter-rouge">whoami</code> shows the user’s current identity.</li>
+  <li><code class="highlighter-rouge">/</code> on its own is the root directory of the whole file system.</li>
+  <li>A relative path specifies a location starting from the current location.</li>
+  <li>An absolute path specifies a location from the root of the file system.</li>
+  <li>Directory names in a path are separated with ‘/’ on Unix, but ‘\’ on Windows.</li>
+  <li>’..’ means “the directory above the current one”;
+‘.’ on its own means “the current directory”.</li>
+  <li>Most files’ names are <code class="highlighter-rouge">something.extension</code>.
+The extension isn’t required,
+and doesn’t guarantee anything,
+but is normally used to indicate the type of data in the file.</li>
+  <li>Most commands take options (flags) which begin with a ‘-‘.</li>
+</ul>
+
+<h2 id="creating-things"><a href="">Creating Things</a></h2>
+
+<ul>
+  <li><code class="highlighter-rouge">cp old new</code> copies a file.</li>
+  <li><code class="highlighter-rouge">mkdir path</code> creates a new directory.</li>
+  <li><code class="highlighter-rouge">mv old new</code> moves (renames) a file or directory.</li>
+  <li><code class="highlighter-rouge">rm path</code> removes (deletes) a file.</li>
+  <li><code class="highlighter-rouge">rmdir path</code> removes (deletes) an empty directory.</li>
+  <li>Unix documentation uses ‘^A’ to mean “control-A”.</li>
+  <li>The shell does not have a trash bin: once something is deleted, it’s really gone.</li>
+  <li>Nano is a very simple text editor — please use something else for real work.</li>
+</ul>
+
+<h2 id="pipes-and-filters"><a href="">Pipes and Filters</a></h2>
+
+<ul>
+  <li><code class="highlighter-rouge">cat</code> displays the contents of its inputs.</li>
+  <li><code class="highlighter-rouge">head</code> displays the first few lines of its input.</li>
+  <li><code class="highlighter-rouge">tail</code> displays the last few lines of its input.</li>
+  <li><code class="highlighter-rouge">sort</code> sorts its inputs.</li>
+  <li><code class="highlighter-rouge">wc</code> counts lines, words, and characters in its inputs.</li>
+  <li><code class="highlighter-rouge">command &gt; file</code> redirects a command’s output to a file.</li>
+  <li><code class="highlighter-rouge">first | second</code> is a pipeline: the output of the first command is used as the input to the second.</li>
+  <li>The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</li>
+</ul>
+
+<h2 id="loops"><a href="">Loops</a></h2>
+
+<ul>
+  <li>A <code class="highlighter-rouge">for</code> loop repeats commands once for every thing in a list.</li>
+  <li>Every <code class="highlighter-rouge">for</code> loop needs a variable to refer to the current “thing”.</li>
+  <li>Use <code class="highlighter-rouge">$name</code> to expand a variable (i.e., get its value).</li>
+  <li>Do not use spaces, quotes, or wildcard characters such as ‘*’ or ‘?’ in filenames, as it complicates variable expansion.</li>
+  <li>Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.</li>
+  <li>Use the up-arrow key to scroll up through previous commands to edit and repeat them.</li>
+  <li>Use “control-r” to search through the previously entered commands.</li>
+  <li>Use <code class="highlighter-rouge">history</code> to display recent commands, and <code class="highlighter-rouge">!number</code> to repeat a command by number.</li>
+</ul>
+
+<h2 id="shell-scripts"><a href="">Shell Scripts</a></h2>
+
+<ul>
+  <li>Save commands in files (usually called shell scripts) for re-use.</li>
+  <li><code class="highlighter-rouge">bash filename</code> runs the commands saved in a file.</li>
+  <li><code class="highlighter-rouge">$*</code> refers to all of a shell script’s command-line parameters.</li>
+  <li><code class="highlighter-rouge">$1</code>, <code class="highlighter-rouge">$2</code>, etc., refer to specified command-line parameters.</li>
+  <li>Place variables in quotes if the values might have spaces in them.</li>
+  <li>Letting users decide what files to process is more flexible and more consistent with built-in Unix commands.</li>
+</ul>
+
+<h2 id="finding-things"><a href="">Finding Things</a></h2>
+
+<ul>
+  <li><code class="highlighter-rouge">find</code> finds files with specific properties that match patterns.</li>
+  <li><code class="highlighter-rouge">grep</code> selects lines in files that match patterns.</li>
+  <li><code class="highlighter-rouge">man command</code> displays the manual page for a given command.</li>
+  <li><code class="highlighter-rouge">*</code> matches zero or more characters in a filename, so <code class="highlighter-rouge">*.txt</code> matches all files ending in <code class="highlighter-rouge">.txt</code>.</li>
+  <li><code class="highlighter-rouge">?</code> matches any single character in a filename, so <code class="highlighter-rouge">?.txt</code> matches <code class="highlighter-rouge">a.txt</code> but not <code class="highlighter-rouge">any.txt</code>.</li>
+  <li><code class="highlighter-rouge">$(command)</code> inserts a command’s output in place.</li>
+  <li><code class="highlighter-rouge">man command</code> displays the manual page for a given command.</li>
+</ul>
+
+<h2 id="glossary">Glossary</h2>
+
+<h4 id="absolute-path">absolute path</h4>
+<p>:   A <a href="#path">path</a> that refers to a particular location in a file system.
+    Absolute paths are usually written with respect to the file system’s
+    <a href="#root-directory">root directory</a>,
+    and begin with either “/” (on Unix) or “\” (on Microsoft Windows).
+    See also: <a href="#relative-path">relative path</a>.</p>
+
+<h4 id="argument">argument</h4>
+<p>:   A value given to a function or program when it runs.
+    The term is often used interchangeably (and inconsistently) with <a href="#parameter">parameter</a>.</p>
+
+<h4 id="command-shell">command shell</h4>
+<p>:   See <a href="#shell">shell</a></p>
+
+<h4 id="command-line-interface">command-line interface</h4>
+<p>:   An interface based on typing commands,
+    usually at a <a href="#read-evaluate-print-loop">REPL</a>.
+    See also: <a href="#graphical-user-interface">graphical user interface</a>.</p>
+
+<h4 id="comment">comment</h4>
+<p>:   A remark in a program that is intended to help human readers understand what is going on,
+    but is ignored by the computer.
+    Comments in Python, R, and the Unix shell start with a <code class="highlighter-rouge">#</code> character and run to the end of the line;
+    comments in SQL start with <code class="highlighter-rouge">--</code>,
+    and other languages have other conventions.</p>
+
+<h4 id="current-working-directory">current working directory</h4>
+<p>:   The directory that <a href="#relative-path">relative paths</a> are calculated from;
+    equivalently,
+    the place where files referenced by name only are searched for.
+    Every <a href="#process">process</a> has a current working directory.
+    The current working directory is usually referred to using the shorthand notation <code class="highlighter-rouge">.</code> (pronounced “dot”).</p>
+
+<h4 id="file-system">file system</h4>
+<p>:   A set of files, directories, and I/O devices (such as keyboards and screens).
+    A file system may be spread across many physical devices,
+    or many file systems may be stored on a single physical device;
+    the <a href="#operating-system">operating system</a> manages access.</p>
+
+<h4 id="filename-extension">filename extension</h4>
+<p>:   The portion of a file’s name that comes after the final “.” character.
+    By convention this identifies the file’s type:
+    <code class="highlighter-rouge">.txt</code> means “text file”, <code class="highlighter-rouge">.png</code> means “Portable Network Graphics file”,
+    and so on. These conventions are not enforced by most operating systems:
+    it is perfectly possible to name an MP3 sound file <code class="highlighter-rouge">homepage.html</code>.
+    Since many applications use filename extensions to identify the <a href="#mime-type">MIME type</a> of the file,
+    misnaming files may cause those applications to fail.</p>
+
+<h4 id="filter">filter</h4>
+<p>:   A program that transforms a stream of data.
+    Many Unix command-line tools are written as filters:
+    they read data from <a href="#standard-input">standard input</a>,
+    process it, and write the result to <a href="#standard-output">standard output</a>.</p>
+
+<h4 id="flag">flag</h4>
+<p>:   A terse way to specify an option or setting to a command-line program.
+    By convention Unix applications use a dash followed by a single letter,
+    such as <code class="highlighter-rouge">-v</code>, or two dashes followed by a word, such as <code class="highlighter-rouge">--verbose</code>,
+    while DOS applications use a slash, such as <code class="highlighter-rouge">/V</code>.
+    Depending on the application, a flag may be followed by a single argument, as in <code class="highlighter-rouge">-o /tmp/output.txt</code>.</p>
+
+<h4 id="for-loop">for loop</h4>
+<p>:   A loop that is executed once for each value in some kind of set, list, or range.
+    See also: <a href="#while-loop">while loop</a>.</p>
+
+<h4 id="graphical-user-interface">graphical user interface</h4>
+<p>:   A graphical user interface,
+    usually controlled by using a mouse.
+    See also: <a href="#command-line-interface">command-line interface</a>.</p>
+
+<h4 id="home-directory">home directory</h4>
+<p>:   The default directory associated with an account on a computer system.
+    By convention, all of a user’s files are stored in or below her home directory.</p>
+
+<h4 id="loop">loop</h4>
+<p>:   A set of instructions to be executed multiple times. Consists of a <a href="#loop-body">loop body</a> and (usually) a
+    condition for exiting the loop. See also <a href="#for-loop">for loop</a> and <a href="#while-loop">while loop</a>.</p>
+
+<h4 id="loop-body">loop body</h4>
+<p>:   The set of statements or commands that are repeated inside a <a href="#for-loop">for loop</a>
+    or <a href="#while-loop">while loop</a>.</p>
+
+<h4 id="mime-type">MIME type</h4>
+<p>:   MIME (Multi-Purpose Internet Mail Extensions) types describe different file types for exchange on the Internet,
+    for example images, audio, and documents.</p>
+
+<h4 id="operating-system">operating system</h4>
+<p>:   Software that manages interactions between users, hardware, and software <a href="#process">processes</a>. Common
+    examples are Linux, OS X, and Windows.</p>
+
+<h4 id="orthogonal">orthogonal</h4>
+<p>:   To have meanings or behaviors that are independent of each other.
+    If a set of concepts or tools are orthogonal,
+    they can be combined in any way.</p>
+
+<h4 id="parameter">parameter</h4>
+<p>:   A variable named in the function’s declaration that is used to hold a value passed into the call.
+    The term is often used interchangeably (and inconsistently) with <a href="#argument">argument</a>.</p>
+
+<h4 id="parent-directory">parent directory</h4>
+<p>:   The directory that “contains” the one in question.
+    Every directory in a file system except the <a href="#root-directory">root directory</a> has a parent.
+    A directory’s parent is usually referred to using the shorthand notation <code class="highlighter-rouge">..</code> (pronounced “dot dot”).</p>
+
+<h4 id="path">path</h4>
+<p>:   A description that specifies the location of a file or directory within a <a href="#file-system">file system</a>.
+    See also: <a href="#absolute-path">absolute path</a>, <a href="#relative-path">relative path</a>.</p>
+
+<h4 id="pipe">pipe</h4>
+<p>:   A connection from the output of one program to the input of another.
+    When two or more programs are connected in this way, they are called a “pipeline”.</p>
+
+<h4 id="process">process</h4>
+<p>:   A running instance of a program, containing code, variable values,
+    open files and network connections, and so on.
+    Processes are the “actors” that the <a href="#operating-system">operating system</a> manages;
+    it typically runs each process for a few milliseconds at a time
+    to give the impression that they are executing simultaneously.</p>
+
+<h4 id="prompt">prompt</h4>
+<p>:   A character or characters display by a <a href="#read-evaluate-print-loop">REPL</a> to show that
+    it is waiting for its next command.</p>
+
+<h4 id="quoting">quoting</h4>
+<p>:   (in the shell):
+    Using quotation marks of various kinds to prevent the shell from interpreting special characters.
+    For example, to pass the string <code class="highlighter-rouge">*.txt</code> to a program,
+    it is usually necessary to write it as <code class="highlighter-rouge">'*.txt'</code> (with single quotes)
+    so that the shell will not try to expand the <code class="highlighter-rouge">*</code> wildcard.</p>
+
+<dl>
+  <dt>read-evaluate-print loop</dt>
+  <dd>(REPL): A <a href="#command-line-interface">command-line interface</a> that reads a command from the user,
+executes it, prints the result, and waits for another command.</dd>
+</dl>
+
+<h4 id="redirect">redirect</h4>
+<p>:   To send a command’s output to a file rather than to the screen or another command,
+    or equivalently to read a command’s input from a file.</p>
+
+<h4 id="regular-expression">regular expression</h4>
+<p>:   A pattern that specifies a set of character strings.
+    REs are most often used to find sequences of characters in strings.</p>
+
+<h4 id="relative-path">relative path</h4>
+<p>:   A <a href="#path">path</a> that specifies the location of a file or directory
+    with respect to the <a href="#current-working-directory">current working directory</a>.
+    Any path that does not begin with a separator character (“/” or “\”) is a relative path.
+    See also: <a href="#absolute-path">absolute path</a>.</p>
+
+<h4 id="root-directory">root directory</h4>
+<p>:   The top-most directory in a <a href="#file-system">file system</a>.
+    Its name is “/” on Unix (including Linux and Mac OS X) and “\” on Microsoft Windows.</p>
+
+<h4 id="shell">shell</h4>
+<p>:   A <a href="#cli">command-line interface</a> such as Bash (the Bourne-Again Shell)
+    or the Microsoft Windows DOS shell
+    that allows a user to interact with the <a href="#operating-system">operating system</a>.</p>
+
+<h4 id="shell-script">shell script</h4>
+<p>:   A set of <a href="#shell">shell</a> commands stored in a file for re-use.
+    A shell script is a program executed by the shell;
+    the name “script” is used for historical reasons.</p>
+
+<h4 id="standard-input">standard input</h4>
+<p>:   A process’s default input stream.
+    In interactive command-line applications,
+    it is typically connected to the keyboard;
+    in a <a href="#pipe">pipe</a>,
+    it receives data from the <a href="#standard-output">standard output</a> of the preceding process.</p>
+
+<h4 id="standard-output">standard output</h4>
+<p>:   A process’s default output stream.
+    In interactive command-line applications,
+    data sent to standard output is displayed on the screen;
+    in a <a href="#pipe">pipe</a>,
+    it is passed to the <a href="#standard-input">standard input</a> of the next process.</p>
+
+<h4 id="sub-directory">sub-directory</h4>
+<p>:   A directory contained within another directory.</p>
+
+<h4 id="tab-completion">tab completion</h4>
+<p>:   A feature provided by many interactive systems in which
+    pressing the Tab key triggers automatic completion of the current word or command.</p>
+
+<h4 id="variable">variable</h4>
+<p>:   A name in a program that is associated with a value or a collection of values.</p>
+
+<h4 id="while-loop">while loop</h4>
+<p>:   A loop that keeps executing as long as some condition is true.
+    See also: <a href="#for-loop">for loop</a>.</p>
+
+<h4 id="wildcard">wildcard</h4>
+<p>:   A character used in pattern matching.
+    In the Unix shell,
+    the wildcard <code class="highlighter-rouge">*</code> matches zero or more characters,
+    so that <code class="highlighter-rouge">*.txt</code> matches all files whose names end in <code class="highlighter-rouge">.txt</code>.</p>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Workshop Instructors</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><a href="https://sph.umich.edu/faculty-profiles/kang-hyunmin.html">Hyun Min Kang</a></li>
+          <li><a href="https://gsbs.uth.edu/faculty/faculty-directory/faculty-profiles.htm?id=88d65672-6183-4972-997c-e7e74598e4ec">Goo Jun</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/htsworkshop">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">htsworkshop</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

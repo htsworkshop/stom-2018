@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>KOGO HTS Workshop 2018</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/kogo-2018/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/kogo-2018/class-material/day3-answers.html">
+  <link rel="alternate" type="application/rss+xml" title="KOGO HTS Workshop 2018" href="http://localhost:4000/kogo-2018/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/kogo-2018/">KOGO HTS Workshop 2018</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="/kogo-2018/day1/">Day 1</a>
+        <a class="page-link" href="/kogo-2018/day2/">Day 2</a>
+        <a class="page-link" href="/kogo-2018/setup/">Setup</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <article class="post-content">
+    <h2 id="day-3-practice---solutions-for-practice-examples">Day 3 Practice - Solutions for Practice Examples</h2>
+
+<h3 id="i-1-exploring-fastq-files-in-unix">I-1) Exploring FASTQ files in UNIX.</h3>
+
+<h4 id="5-what-are-the-barcodes-that-appear-most-frequently">5. What are the barcodes that appear most frequently?</h4>
+<ul>
+  <li>
+    <p>Answer : For the full command, see below (scroll to right to see all)</p>
+
+    <pre>zcat data/bioboot_2015a_R2.fastq.gz | awk 'NR % 4 == 2 {print;}' | sort | uniq -c | sort -n -r | less</pre>
+  </li>
+  <li>
+    <p>Expected Output : First several lines are shown below.</p>
+    <pre>
+ 20442 TGACCAA
+ 20095 CAGATCA
+ 17475 TTAGGCA
+ 16342 ACAGTGA
+    91 ACAGTGC
+    74 GCCCATA
+    72 ACCGTGA
+    69 TTAGCAT
+    69 CAGATCC
+ ...</pre>
+  </li>
+</ul>
+
+<h4 id="6a-skeleton-code-for-fastq-demultiplexing">6a. Skeleton Code for FASTQ Demultiplexing</h4>
+<ul>
+  <li>Below is the skeleton python code you can start with
+    <pre>
+import gzip
+
+bc2id = { ... }  # dictionary to map barcodes to sample IDs
+outfs = {}       # dictionary to map barcodes to output file handles
+for bc in bc2id:
+	outfs[bc] = gzip.open( ... )  # open output file for each barcode
+unknown = gzip.open( ... )        # open output file for unknown file
+
+f1 = gzip.open( ... )  # open FASTQ file for the first read
+f2 = gzip.open( ... )  # open FASTQ file for the second read
+
+for line in f2:
+   # fill in the code below in the following way
+   # 1. Read barcode information from second read
+   # 2. determine the file handle to write to based on the barcode
+   # 3. Read from the first FASTQ and write to the file handle
+
+# close output handle if needed </pre>
+  </li>
+</ul>
+
+<h4 id="6b-answer-for-fastq-demultiplexing---exact-match">6b. Answer for FASTQ Demultiplexing - Exact Match</h4>
+<ul>
+  <li>Below is the example solution based on exact match
+    <pre>
+import gzip
+
+bc2id = {'ACAGTGA' : 'Sample1', 'CAGATCA' : 'Sample2' , 'GCCAATA' : 'Sample3', 'TGACCAA' : 'Sample4' ,'TTAGGCA' : 'Sample5'}
+outfs = {}
+for bc in bc2id:   ## for each barcode, create a filehandle and store to a dictionary
+  outfs[bc] = gzip.open('out/bioboot_2015a_'+bc2id[bc]+'.fastq.gz','w')
+outunknown = gzip.open('out/bioboot_2015a_UNKNOWN.fastq.gz','w')
+
+f1 = gzip.open('data/bioboot_2015a_R1.fastq.gz','r')  ## read the first FASTQ
+f2 = gzip.open('data/bioboot_2015a_R2.fastq.gz','r')  ## read the second FASTQ
+
+for rname2 in f2:    ## iterate over second FASTQ file (read name first)
+  seq2 = f2.readline().rstrip()  ## next line is barcode sequence (remove end-of-line EOL marker)
+  dummy2 = f2.readline()         ## next line is '+'
+  qual2 = f2.readline()          ## next line is quality
+  outf = outunknown              ## initially consider as output
+  if ( seq2 in outfs ):          ## if the barcode is in the dictionary
+    outf = outfs[seq2]           ## change the output file handle adequately
+  outf.write(f1.readline())      ## read four lines from the first FASTQ 
+  outf.write(f1.readline())      ##   and write to the designated file handle
+  outf.write(f1.readline())
+  outf.write(f1.readline())
+
+outunknown.close()               ## need to close the file handles
+for bc in outfs:
+  outfs[bc].close() </pre>
+  </li>
+  <li>See the expected output. (Number of unclassified reads)
+    <pre>
+$ zcat data/bioboot_2015a_R1.fastq.gz | awk 'NR % 4 == 2 {print;}' | wc -l
+100000
+$ zcat zcat out/bioboot_2015a_UNKNOWN.fastq.gz | awk 'NR % 4 == 2 {print;}' | wc -l
+4976 </pre>
+    <ul>
+      <li>4.98% of reads are unclassified.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="6c-answer-for-fastq-demultiplexing---allowing-one-mismatch">6c. Answer for FASTQ Demultiplexing - Allowing one mismatch</h4>
+<ul>
+  <li>Below is the example solution allowing up to one mismatch
+    <pre>
+import gzip
+
+bc2id = {'ACAGTGA' : 'Sample1', 'CAGATCA' : 'Sample2' , 'GCCAATA' : 'Sample3', 'TGACCAA' : 'Sample4' ,'TTAGGCA' : 'Sample5'}
+outfs = {}
+nucleotides = ('N','A','C','G','T') 
+for bc in bc2id:
+  f = gzip.open('out/bioboot_2015a_'+bc2id[bc]+'.fastq.gz','w')
+  outfs[bc] = f
+  bclist = list(bc)            # convert string to list
+  for i in range(len(bclist)): # choose position to substitute
+    for n in nucleotides:      # choose a nucleotide substitute to
+      bclist[i] = n
+      newbc = "".join(bclist)
+      if ( newbc != bc ):
+        outfs[newbc] = f   # add dictionary with additional barcode with one mismatch
+  bclist[i] = bc[i]        # convert the character back to the original one
+outunknown = gzip.open('out/bioboot_2015a_UNKNOWN.fastq.gz','w')
+
+f1 = gzip.open('data/bioboot_2015a_R1.fastq.gz')  # the rest is identical to the previous one
+f2 = gzip.open('data/bioboot_2015a_R2.fastq.gz')
+
+for rname2 in f2:
+  seq2 = f2.readline().rstrip()
+  dummy2 = f2.readline()
+  qual2 = f2.readline()
+  outf = outunknown
+  if ( seq2 in outfs ):
+    outf = outfs[seq2]
+  outf.write(f1.readline())
+  outf.write(f1.readline())
+  outf.write(f1.readline())
+  outf.write(f1.readline())
+
+outunknown.close()
+for bc in outfs:
+  outfs[bc].close() </pre>
+  </li>
+  <li>See the expected output. (Number of unclassified reads)
+    <pre>
+$ zcat data/bioboot_2015a_R1.fastq.gz | awk 'NR % 4 == 2 {print;}' | wc -l
+100000
+$ zcat zcat out/bioboot_2015a_UNKNOWN.fastq.gz | awk 'NR % 4 == 2 {print;}' | wc -l
+3556 </pre>
+    <ul>
+      <li>3.56% of reads are unclassified.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="iii-1-understanding-how-to-access-fasta-files">III-1) Understanding how to access FASTA files.</h3>
+
+<h4 id="7-are-the-two-subsets-of-sequences-in-the-above-identical-to-each-other">7. Are the two subsets of sequences in the above identical to each other?</h4>
+<ul>
+  <li>
+    <p>You can extract the two sequences into separate files using <code class="highlighter-rouge">samtools</code></p>
+
+    <pre>
+$ samtools faidx data/hs37d5.fa 20:10000000-10001000 &gt; out/day3.extracted.hs37d5.txt
+$ samtools faidx data/ucsc.hg19.fasta chr20:10000000-10001000 &gt; out/day3.extracted.hg19.txt </pre>
+  </li>
+  <li>
+    <p>Running <code class="highlighter-rouge">diff</code> on these data will highlight many differences in case.</p>
+
+    <pre>
+$ diff out/day3.extracted.hs37d5.txt out/day3.extracted.hg19.txt
+1,10c1,10
+&lt; &gt;20:10000000-10001000
+&lt; TTGTTTACTACAGCTTTGTAGTAAATTTTGAACTCTAAAGTGTTAGTTCTCTAACTTTGT
+&lt; TTGTTTTTCAAGAGTGTTTTGACTCTTCTTACTGCATCCCTTGCATTTCCATATGGACTT
+&lt; TATAATCAGCCATGTCAACTTCTGCAAGAAAGACAGCTAGGATTTTGATAAGGATTGTGT
+&lt; TGAATCTGTAGTCCAATTTTGGGAATACTACCATGTTAACATCGTCTTCCCATCCATGCA
+&lt; CGTGCAATAGCTTACCATTTATTTGGTCTTCCTCAATTTCTGTCAACAATGATTTGTAGT
+&lt; TTTCAGTTGCAAGTCTTGCACTTCTTTTGTTAAACTTTTTCCAAATATTTATTCTTCTTA
+&lt; ATTACATAATTCTCATAATTAATAAAATTCTGAAATTTTCTTAATTTCATTTTTGTGGCC
+&lt; ATGCACTTTAAAACTTGCCTTTTAACAAGACTTCCAGATGATTCTTGTGAACATTAAGTT
+&lt; TGTGAAGTGCTTCTCTATTGACAAACTGAACTCACGTGACATTCCACACAGCACTGGCAA
+---
+&gt; &gt;chr20:10000000-10001000
+&gt; Ttgtttactacagctttgtagtaaattttgaactctaaagtgttagttctctaactttgt
+&gt; ttgtttttcaagagtgttttgactcttcttactgcatcccttgcatttccatatggactt
+&gt; tataatcagccatgtcaacttctgcaagaaagacagctaggattttgataaggattgtgt
+&gt; tgaatctgtagtccaattttgggaatactaccatgttaacatcgtcttcccatccatgca
+&gt; cgtgcaatagcttaccatttatttggtcttcctcaatttctgtcaacaatgatttgtagt
+&gt; tttcagttgcaagtcttgcacttcttttgttaaactttttccaaatatttattcttctta
+&gt; attacataattctcataattaataaaattctgaaattttcttaatttcatttttgTGGCC
+&gt; ATGCACTttaaaacttgccttttaacaagacttccagatgattcttgtgaacattaagtt
+&gt; tgtgaagtgctTCTCTATTGACAAACTGAACTCACGTGACATTCCACACAGCACTGGCAA
+17,18c17,18
+&lt; CTTTCTGGTTCCAGATCTGACACCAATTACCTTTCTGATTTTGGACAAACCACTTAATAT
+&lt; TTGTAACTTACAATTACTTCAACTGAATAATAAAAGAATTG
+---
+&gt; CTttctggttccagatctgacaccaattacctttctgattttggacaaaccacttaatat
+&gt; ttgtaacttacaattacttcaactgaataataaaagaattg </pre>
+  </li>
+  <li>
+    <p>Changing the UCSC (hg19) sequences to uppercases will show that they are identical.</p>
+    <pre>
+$ samtools faidx data/ucsc.hg19.fasta chr20:10000000-10001000 | awk '{ print toupper($0); }' &gt; out/day3.extracted.hg19.txt
+$ diff out/day3.extracted.hs37d5.txt out/day3.extracted.hg19.txt 
+1c1
+&lt; &gt;20:10000000-10001000
+---
+&gt; &gt;CHR20:10000000-10001000 </pre>
+  </li>
+</ul>
+
+<h3 id="iii-3-representing-genes-and-transcripts-using-gtf-and-genepred-format">III-3) Representing genes and transcripts using GTF and genePred format</h3>
+
+<h4 id="2a-how-many-total-refflat-entries-exist-what-is-the-unique-number-of-canonical-gene-names-and-transcript-ids-that-exist-in-the-refflat-database">2a. How many total refFlat entries exist? What is the unique number of canonical gene names and transcript IDs that exist in the refFlat database?</h4>
+<ul>
+  <li>Number of total refFlat entries
+    <pre>
+$ zcat refFlat.txt.gz | wc -l
+54196 </pre>
+  </li>
+  <li>Number of unique canonical gene names
+    <pre>
+$ zcat refFlat.txt.gz | cut -f 1 | sort | uniq | wc -l
+26397 </pre>
+  </li>
+  <li>Number of unique transcript IDs
+    <pre>
+$ zcat refFlat.txt.gz | cut -f 2 | sort | uniq | wc -l
+50354 </pre>
+  </li>
+</ul>
+
+<h4 id="2b-how-many-different-transcript-exist-for-ldlr-gene-how-are-they-similar-and-different">2b. How many different transcript exist for <em>LDLR</em> gene? How are they similar and different?</h4>
+<ul>
+  <li>List all transcripts with canonical gene name <em>LDLR</em>
+    <pre>
+$ zcat refFlat.txt.gz | grep -w LDLR
+LDLR	NM_001195799	chr19	+	11200037	11244505	11200224	11241992	17	11200037,11210898,11215895,11217240,11218067,11221327,11222189,11223953,11224210,11226769,11227534,11230767,11231045,11233849,11238683,11240188,11241956,	11200291,11211021,11216276,11217363,11218190,11221447,11222315,11224125,11224438,11226888,11227674,11230909,11231198,11234020,11238761,11240346,11244505,
+LDLR	NM_001195798	chr19	+	11200037	11244505	11200224	11241992	18	11200037,11210898,11213339,11215895,11217240,11218067,11221327,11222189,11223953,11224210,11226769,11227534,11230767,11231045,11233849,11238683,11240188,11241962,	11200291,11211021,11213462,11216276,11217363,11218190,11221447,11222315,11224125,11224438,11226888,11227674,11230909,11231198,11234020,11238761,11240346,11244505,
+LDLR	NM_001195803	chr19	+	11200037	11244505	11200224	11241992	16	11200037,11210898,11213339,11217240,11218067,11221327,11222189,11223953,11224210,11226769,11227534,11230767,11233849,11238683,11240188,11241956,	11200291,11211021,11213462,11217363,11218190,11221447,11222315,11224125,11224438,11226888,11227674,11230909,11234020,11238761,11240346,11244505,
+LDLR	NM_001195800	chr19	+	11200037	11244505	11200224	11241992	16	11200037,11210898,11213339,11218067,11221327,11222189,11223953,11224210,11226769,11227534,11230767,11231045,11233849,11238683,11240188,11241956,	11200291,11211021,11213462,11218190,11221447,11222315,11224125,11224438,11226888,11227674,11230909,11231198,11234020,11238761,11240346,11244505,
+LDLR	NM_000527	chr19	+	11200037	11244505	11200224	11241992	18	11200037,11210898,11213339,11215895,11217240,11218067,11221327,11222189,11223953,11224210,11226769,11227534,11230767,11231045,11233849,11238683,11240188,11241956,	11200291,11211021,11213462,11216276,11217363,11218190,11221447,11222315,11224125,11224438,11226888,11227674,11230909,11231198,11234020,11238761,11240346,11244505, </pre>
+  </li>
+  <li>They all have the same start/end positions, but the number of exons and coding sequences are slightly different.</li>
+</ul>
+
+<h4 id="2c-for-multiple-transcripts-with-the-same-canonical-gene-names-are-they-always-located-in-the-same-chromosome-or-not">2c. For multiple transcripts with the same canonical gene names, are they always located in the same chromosome or not?</h4>
+<ul>
+  <li>First, the total number of canonical gene names is <code class="highlighter-rouge">26,397</code>
+    <pre>
+$ zcat refFlat.txt.gz | cut -f 1 | sort | uniq | wc -l
+26397 </pre>
+  </li>
+  <li>Next, the total number of unique chromosome x canonical gene names is <code class="highlighter-rouge">27,843</code>
+    <pre>
+$ cat refFlat.txt.gz | cut -f 1,3 | sort | uniq | wc -l
+27843 </pre>
+  </li>
+  <li>This means that up to 1,446 genes are duplicated across multiple chromosomes.</li>
+</ul>
+
+<h4 id="4a-how-many-genes-transcripts-exons-and-cds-exists-in-gencode-v19-gtf">4a. How many genes, transcripts, exons, and CDS exists in GENCODE v19 GTF?</h4>
+<ul>
+  <li>You can check the third column in the GTF
+    <pre>
+$ zcat data/gencode.v19.annotation.gtf.gz | grep -v ^# | cut -f 3 | sort | uniq -c
+723784 CDS
+1196293 exon
+57820 gene
+114 Selenocysteine
+84144 start_codon
+76196 stop_codon
+196520 transcript
+284573 UTR </pre>
+  </li>
+</ul>
+
+<h3 id="iii-4--working-with-bed-files">III-4)  Working with BED files.</h3>
+
+<h4 id="3-write-a-python-program-that-print-out-lines-that-overlaps-with-a-region">3. Write a python program that print out lines that overlaps with a region.</h4>
+<pre>
+import sys
+
+script, chrom, beg, end = sys.argv
+
+f = open('refFlat.bed','r')
+for line in f:
+    tok = line.split()
+    if ( ( tok[0] == chrom ) and ( ( tok[2] &gt; beg ) and ( tok[1] &lt; end ) ) ):
+        print line,
+f.close() </pre>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Workshop Instructors</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><a href="https://sph.umich.edu/faculty-profiles/kang-hyunmin.html">Hyun Min Kang</a></li>
+          <li><a href="https://gsbs.uth.edu/faculty/faculty-directory/faculty-profiles.htm?id=88d65672-6183-4972-997c-e7e74598e4ec">Goo Jun</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/htsworkshop">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">htsworkshop</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
