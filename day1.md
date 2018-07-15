@@ -95,6 +95,11 @@ lecture part. It is separated by the following four parts.
 
 #### IV) Calling structural variants (large deletions and CNVs) from sequence reads
 
+- [IV-1. Preparing input files for Lumpy](../class-material/day1-prepare-svcall)
+- [IV-2. SV discovery using Lumpy](../class-material/day1-lumpy)
+- [IV-3. Genotyping SV using SVTyper ](../class-material/day1-svtyper)
+  
+
 —- End/Wrap-Up —
 
 <br>
