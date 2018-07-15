@@ -36,8 +36,7 @@ to the BAM files directory under the project directory.
 # From your home directory
 mkdir sv
 cd sv
-ln -s /BiO/data/topmed/bams bams
-</pre>
+ln -s /BiO/data/topmed/bams bams </pre>
 
 
 #### b. Split reads and discordant read pairs
@@ -76,8 +75,7 @@ samtools view -h sample.bam \
     | /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin \
     | samtools view -Sb - \
     | samtools sort -  \
-	> sample.splitters.bam
-</pre>
+	> sample.splitters.bam </pre>
 
 - Generate discordant read pair BAM files
 > <pre>

@@ -25,8 +25,7 @@ We will use LUMPY Express, because our use is a standard use case.
         -B sample.bam \
         -S sample.splitters.bam \
         -D sample.discordants.bam \
-        -o sample.vcf 
-</pre>
+        -o sample.vcf </pre>
 
 - Run LUMPY Express jointly on multiple samples with pre-extracted splitters and discordants
 
@@ -35,8 +34,7 @@ We will use LUMPY Express, because our use is a standard use case.
         -B sample1.bam,sample2.bam,sample3.bam \
         -S sample1.splitters.bam,sample2.splitters.bam,sample3.splitters.bam \
         -D sample1.discordants.bam,sample2.discordants.bam,sample3.discordants.bam \
-        -o multi_sample.vcf 
-</pre>
+        -o multi_sample.vcf </pre>
 
 - Run LUMPY Express on a tumor-normal pair
 <pre>
@@ -44,8 +42,7 @@ We will use LUMPY Express, because our use is a standard use case.
         -B tumor.bam,normal.bam \
         -S tumor.splitters.bam,normal.splitters.bam \
         -D tumor.discordants.bam,normal.discordants.bam \
-        -o tumor_normal.vcf
-</pre>
+        -o tumor_normal.vcf </pre>
 
 #### Running LUMPY on our samples
 
@@ -55,13 +52,11 @@ lumpyexpress \
  -B bams/NWD230091.bam,bams/NWD231092.bam,bams/NWD259170.bam,bams/NWD315403.bam,bams/NWD495157.bam,bams/NWD684137.bam \
  -D NWD230091.discordant.bam,NWD231092.discordant.bam,NWD259170.discordant.bam,NWD315403.discordant.bam,NWD495157.discordant.bam,NWD684137.discordant.bam \
  -S NWD230091.splitter.bam,NWD231092.splitter.bam,NWD259170.splitter.bam,NWD315403.splitter.bam,NWD495157.splitter.bam,NWD684137.splitter.bam \
- -o multi.sv.vcf
-</pre>
+ -o multi.sv.vcf </pre>
 
 - Tip: easy way to generate comma-separated filenames
 > <pre>
-ls bams/*.bam  |tr '\n' ','
-</pre>
+ls bams/*.bam  |tr '\n' ',' </pre>
 
 * Open multi.sv.vcf file. How many variants did you discover?
 * Check INFO column for additional information about each variant 

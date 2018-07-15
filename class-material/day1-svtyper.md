@@ -27,14 +27,12 @@ svtyper \
  -i multi.sv.vcf \
  -B bams/NWD230091.bam,bams/NWD231092.bam,bams/NWD259170.bam,bams/NWD315403.bam,bams/NWD495157.bam,bams/NWD684137.bam \
  -l multi.genotype.json \
- -o multi.genotype.vcf
-</pre>
+ -o multi.genotype.vcf </pre>
 
 
 > <pre>
 # Checkout multi.genotype.vcf file
-less -S multi.genotype.vcf
-</pre>
+less -S multi.genotype.vcf </pre>
 
 * What do you recognize in the genotype fields of the genotype VCF file?
 
@@ -42,8 +40,7 @@ Now, let's make a visual identification of one of the SVs we genotyped.
 One way to do so is using samtools tview
 
 > <pre>
-samtools tview bams/NWD231092.bam
-</pre>
+samtools tview bams/NWD231092.bam </pre>
 
 But it's not very good way to visualize large SVs.
 You can use [IGV (Integrative Genome Viewer)](https://software.broadinstitute.org/software/igv/) for a better view.
@@ -55,8 +52,7 @@ You can use [IGV (Integrative Genome Viewer)](https://software.broadinstitute.or
 Now, download BAM file using scp (Mac/Linux/Cygwin command-line). 
 
 > <pre>
-scp (your account)@59.26.46.181:~/sv/bams/NWD231092.bam* .
-</pre>
+scp (your account)@59.26.46.181:~/sv/bams/NWD231092.bam* .  </pre>
 
 If you do not have command-line scp on your Windows laptop, you can use [WinSCP](https://winscp.net).
 
