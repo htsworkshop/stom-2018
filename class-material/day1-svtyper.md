@@ -59,6 +59,7 @@ If you do not have command-line scp on your Windows laptop, you can use [WinSCP]
 * Select the correct reference genome version (Human hg38) from the dropdown list
 * File -> Load from File
 * Go to one of the genotyped deletion locations  (chr22:36,740,000-36,760,000) 
+
 ---
 
 Feel free to ask questions to your instructor(s) if you are stuck. 
