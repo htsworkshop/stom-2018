@@ -164,8 +164,10 @@ difference is.
 ---
 
 Feel free to ask questions to your instructor(s) if you are stuck. 
-Otherwise, let's go to next step 
+Otherwise, let's 
+<!-- go to next step 
 [II-4 Quality control of aligned sequence reads](../class-material/day1-bam-quality-control.html)
-, or go back to [Day 1 Overview](../day1).
+, or -->
+go back to [Day 1 Overview](../day1).
 
 ---

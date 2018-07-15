@@ -40,9 +40,13 @@ When you're writing code, it's nice to have a text editor that is optimized for 
 <br>
 
 ### R and RStudio
-R Binaries for Windows, MacOSX and Linux can be downloaded and installed from [CRAN](http://cran.r-project.org/index.html) (Comprehensive R Archive Network). If possible download the latest binary version of R for your operating system. As of course launch (Aug 16) the latest release (2016/06/21, "Bug in Your Hair") is R-3.3.1.
+R Binaries for Windows, MacOSX and Linux can be downloaded and
+installed from [CRAN](http://cran.r-project.org/index.html)
+(Comprehensive R Archive Network). If possible download the latest
+binary version of R for your operating system. As of course launch
+(Aug 16) the latest release (2018/07/02, "Feather Sprat") is R-3.5.1.
 
-After installing R itself we recommend installing the *preview* version of [RStudio](https://www.rstudio.com/products/rstudio/download/preview/) desktop (v0.99.1285 or above), a slick visual interface for R.
+After installing R itself we recommend installing the *preview* version of [RStudio](https://www.rstudio.com/products/rstudio/download/preview/) desktop (v1.1.453 or close), a slick visual interface for R.
 
 
 

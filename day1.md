@@ -72,7 +72,7 @@ Goo Jun (GJ)
 ### II) Alignment and quality control of sequenced genomes
 
 This hands-on session will begin right after the completion of the
-lecture part. It is separated by the following four parts.
+lecture part. It is separated by the following three parts.
 
 - [II-1. Setting up the access to the compute
   server](../class-material/day1-connect-server)
@@ -80,16 +80,17 @@ lecture part. It is separated by the following four parts.
   reads](../class-material/day1-fastq-practice)
 - [II-3. Processing aligned sequence reads
   ](../class-material/day1-bam-practice)
-- [II-4. Quality control of aligned sequence
-  reads](../class-material/day1-bam-quality-control)
+<!-- - [II-4. Quality control of aligned sequence
+  reads](../class-material/day1-bam-quality-control) -->
   
 
 —- Lunch Break [1:30 hr] —
 
 ### III) Calling short variants (SNPs and Indels) from sequence reads
 
-This hands-on session will begin right after the completion of the
-lecture part. It is separated by the following four parts.
+- [III-1. Variant calling and joint genotyping using
+  GATK HaplotypeCaller](../class-material/day1-gatk)
+- [III-2. Variant calling and joint genotyping using vt+cramore](../class-material/day1-vt-cramore)  
 
 —- Coffee Break [10 mins] —
 
@@ -107,14 +108,10 @@ lecture part. It is separated by the following four parts.
 ---
 <br>
 
-[A Quick Guide to Organizing Computational Biology Projects (Noble 2009)](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)  
-
 [Unix Referene Commands and Glossary](../class-material/unix-reference.html)  
 
 [Introduction to Bash Shell Scripting](https://en.wikibooks.org/wiki/Bash_Shell_Scripting)  
 
-[Make Install tutorial](http://www.ee.surrey.ac.uk/Teaching/Unix/unix7.html)  
-
-
+[Make Install tutorial](http://www.ee.surrey.ac.uk/Teaching/Unix/unix7.html)
   
 

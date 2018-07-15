@@ -57,8 +57,7 @@ basic UNIX skills (such as free contents material at
 <hr>
 <br>
 
-#### [Day 2. Population-scale analysis of DNA and RNA sequence]({{ site.baseurl }}/day2/) 
-data]({{ site.baseurl }}/day2/)
+#### [Day 2. Population-scale analysis of DNA and RNA sequence data]({{site.baseurl}}/day2/)
 
 | Session | Time           | Topics                   | 
 | :-----: |:--------------:| :----------------------- | 
@@ -74,14 +73,12 @@ data]({{ site.baseurl }}/day2/)
 <hr>
 <br>
 
-<a name="other"></a>
-
-## Relevant Resources 
+<!--## Relevant Resources 
 **BIOINF-575**: Programing Lab in Bioinformatics  
 	
 **Software Carpentry**: Occasional Workshops  
 (Non planned for this year at UM unfortunately) 
-<http://software-carpentry.org>  
+<http://software-carpentry.org> -->
 
 <!--- Uncomment at end of course...
 Add more courses when we find them.
