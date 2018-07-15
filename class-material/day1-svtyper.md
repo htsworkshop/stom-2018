@@ -57,7 +57,7 @@ scp (your account)@59.26.46.181:~/sv/bams/NWD231092.bam* .  </pre>
 If you do not have command-line scp on your Windows laptop, you can use [WinSCP](https://winscp.net).
 
 * Select the correct reference genome version (Human hg38) from the dropdown list
-* File -> Load from File
+* From the menu bar, select 'File' and 'Load from File'
 * Go to one of the genotyped deletion locations  (chr22:36,740,000-36,760,000) 
 
 ---
