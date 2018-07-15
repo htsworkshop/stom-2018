@@ -28,8 +28,8 @@ genomes and transcriptomes as examples of multi-omics sequence analysis at popul
 genomics research and interested beginners, including laboratory scientists and clinicians with a
 basic quantitative background. Ideally, participants are expected to have some basic knowledge of
 human genetics (such as Mendelian inheritance), core statistical principles (such as p-values), and
-basic UNIX skills (such as free contents material at https://www.codecademy.com/learn/learn-the-
-command-line)
+basic UNIX skills (such as free contents material at
+[https://www.codecademy.com/learn/learn-the-command-line](https://www.codecademy.com/learn/learn-the-command-line))
 
 **Requirements:** Participants must bring a laptop with specific [software installed]({{ site.baseurl }}/setup/).
 

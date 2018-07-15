@@ -2,10 +2,13 @@
  * Reset some basic elements
  */
 body, h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
+p, blockquote, pre,
 dl, dd, ol, ul, figure {
   margin: 0;
   padding: 0; }
+
+hr {
+  margin: 10px 0 10px 0; }
 
 /**
  * Add some more table style
@@ -92,12 +95,12 @@ a {
  * Blockquotes
  */
 blockquote {
-  color: #828282;
+  color: #424242;
   border-left: 4px solid #e8e8e8;
   padding-left: 15px;
   font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic; }
+  /*    letter-spacing: -1px;*/
+  /*    font-style: italic; */ }
   blockquote > :last-child {
     margin-bottom: 0; }
 

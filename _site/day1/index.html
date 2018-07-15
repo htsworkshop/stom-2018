@@ -55,13 +55,31 @@
 
 <p><br /></p>
 
-<p>Sequencing human genomes is becoming more and more afforable.</p>
+<p>Sequencing human genomes, transcriptomes, and epigenomes are becoming
+more and more feasible and afforable solution to understand the
+molecular basis of complex traits related to human
+diseases.</p>
 
-<p>Most bioinformatics happens on Unix/Linux platforms but why and how do we use Unix?</p>
+<p>In particular, understanding the effect of human genetic
+variation within a large population is important for many applications
+such as genome-wide association analysis (GWAS), expression
+quantitative trait loci (eQTL) mapping, population genetic analysis,
+and other related studies.</p>
 
-<p>Increasingly, the raw output of biological research exists as <em>in silico</em> data, usually in the form of large text files. Unix is particularly suited to working with such files and has many powerful (and flexible) commands that can process your data for you.</p>
+<p>However, processing a large volume of sequence reads and jointly
+analyzing them to detect and genotype variants requires sophisticated 
+technical skill sets.</p>
 
-<p>The real strength of learning Unix is that most of these commands can be combined in an almost unlimited fashion. So if you can learn just five Unix commands, you will be able to do a lot more than just five things. Our objective here is to learn a subset of Unix and to become a productive Unix user without knowing or using every program and feature.</p>
+<p>Today, we will learn from the basics of DNA sequence reads to the
+state-of-the-art software tools and pipelines to align sequence reads,
+to detect genetic variants, and to genotype the variants across a
+population of sequence genomes.</p>
+
+<p>We will assume that you have basic UNIX skills, which can be obtained
+by taking a free online course 
+<a href="https://www.codecademy.com/learn/learn-the-command-line">HERE</a>, but
+we we will guide from the beginning, just in case you may get lost
+from the beginning.</p>
 
 <p><br /></p>
 <hr />
@@ -118,16 +136,10 @@
 </table>
 
 <p><br /></p>
-<hr />
-
-<p><br /></p>
 
 <h3 id="instructors">Instructors:</h3>
 <p>Hyun Min Kang (HMK)
 Goo Jun (GJ)</p>
-
-<p><br /></p>
-<hr />
 
 <hr />
 
@@ -135,157 +147,47 @@ Goo Jun (GJ)</p>
 
 <h2 id="topics">Topics:</h2>
 
-<h3 id="1---design-and-analysis-of-sequencing-studies-in-population-scale">1)   Design and analysis of sequencing studies in population scale</h3>
+<h3 id="i-design-and-analysis-of-sequencing-studies-in-population-scale">I) Design and analysis of sequencing studies in population scale</h3>
 
 <ul>
-  <li>This session consists of lectures only, and there will be no
-hands-on practice after the lecture.</li>
+  <li>This session consists of lectures only, and there will be no hands-on practice after the lecture.</li>
 </ul>
 
-<p><br /></p>
-<hr />
+<p>—- Coffee Break [10 mins] —</p>
 
-<hr />
+<h3 id="ii-alignment-and-quality-control-of-sequenced-genomes">II) Alignment and quality control of sequenced genomes</h3>
 
-<p><br /></p>
-
-<h3 id="2-alignment-and-quality-control-of-sequenced-genomes">2) Alignment and quality control of sequenced genomes</h3>
+<p>This hands-on session will begin right after the completion of the
+lecture part. It is separated by the following four parts.</p>
 
 <ul>
-  <li>The hands-on session will begin right after the completion of the
-lecture part.</li>
-</ul>
-
-<hr />
-
-<h4 id="a-make-connection-to-server">a. Make connection to server</h4>
-
-<ul>
-  <li><em>IMPORTANT NOTE:</em> Make sure that you have received the login information to access the KOBIC
-server.</li>
-  <li><em>IMPORTANT NOTE:</em> For security reasons, we will denote the IP address of the
-server as <code class="highlighter-rouge">IP.AD.DR.ESS</code> and the login ID as <code class="highlighter-rouge">kobic00</code>. Please
-replace these information with your own login ID and IP address.</li>
-  <li>If you have Windows laptop, open <strong>MobaXTerm</strong> and start a local
-terminal.</li>
-  <li>For Mac OS X users, open the <strong>Terminal</strong> utility.</li>
-  <li>To connect to the server, type <code class="highlighter-rouge">ssh kobic00@IP.AD.DR.ESS [Enter]</code> in your shell.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh kobic00@IP.AD.DR.ESS
-kobic@@IP.AD.DR.ESS's password: [Need to type password here]
-Last login: Sun Jul 15 05:59:10 2018 from IP.AD.DR.ESS
-[kobic00@localhost ref]$ 
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<hr />
-
-<h4 id="b-make-a-symbolic-link-to-the-data-directory">b. Make a symbolic link to the data directory</h4>
-
-<ul>
-  <li>Depending on users, the directory structures are slightly different.
-Notably, there are two replicated data directories, <code class="highlighter-rouge">/BiO/data</code>, and
-<code class="highlighter-rouge">/Bio2/data</code>. To avoid performance slowdown, it is important to
-use designated directories for each user.</li>
-  <li>To ensure that each user access their designated data directory,
-we will create a symbolic link under your home directory to point
-the designated data directory.</li>
-  <li>If the last two digits of your username is between <code class="highlighter-rouge">01</code> and <code class="highlighter-rouge">25</code>,
-type the following commands. The second command is for verification
-purpose. Make sure that <code class="highlighter-rouge">BiO</code> is spelled correctly with lowercase
-<code class="highlighter-rouge">i</code>.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kobic00@localhost ~]$ pwd
-/BiO/home/kobic00
-[kobic00@localhost ~]$ ln -s /BiO/data/ data
-[kobic00@localhost ~]$ ls -l
-total 0
-lrwxrwxrwx 1 kobic00 kobic 11 Jul 15 08:08 data -&gt; /BiO/data/
-</code></pre></div>    </div>
-  </li>
-  <li>If the last two digits of your username is between <code class="highlighter-rouge">26</code> and <code class="highlighter-rouge">50</code>,
-type the following commands. The second command is for verification
-purpose. Make sure that <code class="highlighter-rouge">BiO</code> is spelled correctly with lowercase <code class="highlighter-rouge">i</code>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kobic00@localhost ~]$ pwd
-/BiO2/home/kobic00
-[kobic00@localhost ~]$ ln -s /BiO2/data/ data
-[kobic00@localhost ~]$ ls -l
-total 0
-lrwxrwxrwx 1 kobic00 kobic 11 Jul 15 08:08 data -&gt; /BiO2/data/
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<hr />
-
-<h4 id="c-browse-raw-sequence-reads">c. Browse raw sequence reads</h4>
-
-<ul>
-  <li>The first task today is to read the example FASTQ files extracted
-from the 1000 Genomes Project. Type the following command
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kobic00@localhost ~]$ zless ~/data/1000g/fastqs/HG00406.R1.fastq.gz
-</code></pre></div>    </div>
-    <ul>
-      <li>Q. What did appear in the screen?</li>
-      <li>Q. Can you tell what is the base call and quality of the very
-first base of the first read?</li>
-      <li>Q. What happens if you press [Tab] in the middle of typing the
-file path?</li>
-      <li>Q. Why was <code class="highlighter-rouge">zless</code> used instead of <code class="highlighter-rouge">less</code>?</li>
-    </ul>
-  </li>
-  <li>Next, get a basic summary statistics on the FASTQ file using the
-following command
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kobic00@localhost ~]$ zcat ~/data/1000g/fastqs/HG00406.R1.fastq.gz | wc -l
-</code></pre></div>    </div>
-    <ul>
-      <li>Q. What did appear in the screen?</li>
-      <li>Q. What do you think the output means?</li>
-      <li>Q. How many reads are contained in the FASTQ file?</li>
-      <li>Q. How many reads are contained in the other pairs, contained in
-   <code class="highlighter-rouge">~/data/1000g/fastqs/HG00406.R2.fastq.gz</code>?</li>
-    </ul>
-  </li>
-  <li>Next, let’s check whether the two paired FASTQ files have matching
-read names in each line, using the following command.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kobic00@localhost ~]$ paste &lt;(zcat ~/data/1000g/fastqs/HG00406.R1.fastq.gz) \
-&lt;(zcat ~/data/1000g/fastqs/HG00406.R2.fastq.gz) | less -S
-</code></pre></div>    </div>
-    <ul>
-      <li>Q. What do you see in the output?</li>
-      <li>Q. Can you explain what the command did?</li>
-      <li>Q.</li>
-    </ul>
-  </li>
+  <li><a href="../class-material/day1-connect-server">II-1. Setting up the access to the compute
+server</a></li>
+  <li><a href="../class-material/day1-fastq-practice">II-2. Processing raw sequence
+reads</a></li>
+  <li><a href="../class-material/day1-bam-practice">II-3. Processing aligned sequence reads
+</a></li>
+  <li><a href="../class-material/day1-bam-quality-control">II-4. Quality control of aligned sequence
+reads</a></li>
 </ul>
 
 <p>—- Lunch Break [1:30 hr] —</p>
 
-<h4 id="iii-calling-short-variants-snps-and-indels-from-sequence-reads">III) Calling short variants (SNPs and Indels) from sequence reads</h4>
-<p>[1:30hr] HMK</p>
+<h3 id="iii-calling-short-variants-snps-and-indels-from-sequence-reads">III) Calling short variants (SNPs and Indels) from sequence reads</h3>
+
+<p>This hands-on session will begin right after the completion of the
+lecture part. It is separated by the following four parts.</p>
 
 <p>—- Coffee Break [10 mins] —</p>
 
-<h4 id="iv-calling-structural-variants-large-deletions-and-cnvs-from">IV) Calling structural variants (large deletions and CNVs) from</h4>
-<p>sequence reads GJ</p>
-
-<ul>
-  <li>Project organization</li>
-  <li>Compiling software</li>
-</ul>
+<h4 id="iv-calling-structural-variants-large-deletions-and-cnvs-from-sequence-reads">IV) Calling structural variants (large deletions and CNVs) from sequence reads</h4>
 
 <p>—- End/Wrap-Up —</p>
 
 <p><br /></p>
 
-<h3 id="reference-material">Reference material</h3>
-<p><a href="../class-material/bootcamp_01_unix.tar.gz">Example data: bootcamp_01_unix.tar.gz</a> [13M]<br />
-<a href="../class-material/slides_day1-1_unix-motivation.pdf">Slides-1.1</a><br />
-<a href="../class-material/slides_day1-2_unix-intro.pdf">Slides-1.2</a><br />
-<a href="../class-material/slides_day1-3_unix-work.pdf">Slides-1.3</a></p>
-
-<!--- files dont exist yet... 
-[Slides-1.4](../class-material/slides_day1-4_unix-compiling.pdf)  
--->
+<hr />
+<p><br /></p>
 
 <p><a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects (Noble 2009)</a></p>
 
