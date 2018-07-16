@@ -51,8 +51,6 @@ less -S ALL.chr20_GRCh38.part.annotated.sites.vcf</pre>
 ---
 
 Feel free to ask questions to your instructor(s) if you are stuck. 
-Otherwise, let's go to next step 
-[IV-3. Genotyping SV using SVTyper](../class-material/day1-svtyper)
-, or go back to [Day 1 Overview](../day1).
+, or go back to [Day 2 Overview](../day2).
 
 ---
