@@ -35,7 +35,6 @@ information for the anlaysis. This can be done with simple scripting (Perl or Py
 of this workshop, so I made a pre-generated phenotype file that can be used for the eQTL analysis:
 > <pre>
 cp ~/data/1000g/geuvadis/analysis_results/ENSG00000077044.ped .
-cp ~/data/1000g/geuvadis/analysis_results/ENSG00000077044.cov .
 </pre>
 
 Now, let's prepare genotype file for the analysis. For simplicity, we will only analyze cis-eQTL regions of the gene. 
