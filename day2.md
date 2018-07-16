@@ -48,6 +48,7 @@ Goo Jun (GJ)
 
 ### III) Introduction to RNA-seq experiments and eQTL analysis
 - [III-1. RNA-seq data](../class-material/day2-geuvadis)
+- [III-2. eQTL Association Analysis](../class-material/day2-eqtl)
 
 —- Coffee Break [10 mins] —
 
