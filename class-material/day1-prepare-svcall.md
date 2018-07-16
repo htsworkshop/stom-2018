@@ -19,7 +19,11 @@ discordant read pairs in BAM format, so we will use BAM files from TOPMed whole 
 samples. The BAM versions of a 1-Mbp region (chr22:36,000,000-37,000,000) are generated at
 
 > <pre>
-/BiO/data/topmed/bams</pre>
+# Server 1
+/BiO/data/topmed/bams
+# Server 2
+/BiO2/data/topmed/bams
+</pre>
 
 - These BAMs are generated from original CRAM files using samtools:
 
@@ -36,7 +40,13 @@ to the BAM files directory under the project directory.
 # From your home directory
 mkdir sv
 cd sv
-ln -s /BiO/data/topmed/bams bams </pre>
+
+# If you are using Server 1 (i.e. your home directory is under /BiO/home)
+ln -s /BiO/data/topmed/bams bams 
+
+# If you are using Server 2 (i.e. your home directory is under /BiO2/home)
+ln -s /BiO2/data/topmed/bams bams
+</pre>
 
 
 #### b. Split reads and discordant read pairs

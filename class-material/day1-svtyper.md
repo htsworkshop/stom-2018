@@ -18,7 +18,20 @@ file of Illumina paired-end reads aligned with BWA-MEM. SVTyper assesses discord
 from paired-end and split-read alignments to infer genotypes at each site.
 
 SVTyper requires Python 2.7.x, pysam, numpy, and scipy. Our server has Anaconda installed with all required 
-packages and SVTyper is also installed under /BiO/apps/bin/
+packages and SVTyper is also installed under /BiO/apps/bin/ and /BiO2/apps/bin/. 
+
+* You need to add Anaconda path to your PATH variable:
+> <pre>
+# Edit your ~/.bashrc to add this line
+
+# If you are using /BiO/home
+export PATH=/BiO/apps/bin/anaconda2/bin:$PATH
+
+# If you are using /BiO2/home
+export PATH=/BiO2/apps/bin/anaconda2/bin:$PATH 
+
+# Source new bash resources
+source ~/.bashrc </pre>
 
 * Run SVTyper
 
@@ -52,7 +65,7 @@ You can use [IGV (Integrative Genome Viewer)](https://software.broadinstitute.or
 Now, download BAM file using scp (Mac/Linux/Cygwin command-line). 
 
 > <pre>
-scp (your account)@59.26.46.181:~/sv/bams/NWD231092.bam* .  </pre>
+scp (your account)@:SERVER.IP.ADD.RESS~/sv/bams/NWD231092.bam* .  </pre>
 
 If you do not have command-line scp on your Windows laptop, you can use [WinSCP](https://winscp.net).
 
