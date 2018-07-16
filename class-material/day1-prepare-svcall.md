@@ -22,8 +22,7 @@ samples. The BAM versions of a 1-Mbp region (chr22:36,000,000-37,000,000) are ge
 # Server 1
 /BiO/data/topmed/bams
 # Server 2
-/BiO2/data/topmed/bams
-</pre>
+/BiO2/data/topmed/bams </pre>
 
 - These BAMs are generated from original CRAM files using samtools:
 
