@@ -40,13 +40,10 @@ to the BAM files directory under the project directory.
 # From your home directory
 mkdir sv
 cd sv
-
 # If you are using Server 1 (i.e. your home directory is under /BiO/home)
 ln -s /BiO/data/topmed/bams bams 
-
 # If you are using Server 2 (i.e. your home directory is under /BiO2/home)
-ln -s /BiO2/data/topmed/bams bams
-</pre>
+ln -s /BiO2/data/topmed/bams bams </pre>
 
 
 #### b. Split reads and discordant read pairs
