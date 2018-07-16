@@ -37,6 +37,8 @@ Goo Jun (GJ)
 ## Topics:
 
 ### I) Variant annotation, filtering, and data harmonization
+- [I-1. Variant Filtering](../class-material/day2-filtering)
+- [I-2. Variant Annotation](../class-material/day2-annotation)
 
 —- Coffee Break [10 mins] —
 
@@ -45,6 +47,7 @@ Goo Jun (GJ)
 —- Lunch Break [1:30 hr] —
 
 ### III) Introduction to RNA-seq experiments and eQTL analysis
+- [III-1. RNA-seq data](../class-material/day2-geuvadis)
 
 —- Coffee Break [10 mins] —
 
