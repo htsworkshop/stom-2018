@@ -9,7 +9,15 @@ permalink: /day2/
 
 ---
 
-The contents in this page will be hidden before the lecture date.
+Today, we will start from filtering variant calls to analyzing single
+cell RNA-seq data across various contexts of high-throughput genomic
+analysis.
+
+We will assume that you have basic UNIX skills, which can be obtained
+by taking a free online course 
+[HERE](https://www.codecademy.com/learn/learn-the-command-line), but
+we we will guide from the beginning, just in case you may get lost
+from the beginning.
 
 ---
 
@@ -37,12 +45,13 @@ Goo Jun (GJ)
 ## Topics:
 
 ### I) Variant annotation, filtering, and data harmonization
-- [I-1. Variant Filtering](../class-material/day2-filtering)
-- [I-2. Variant Annotation](../class-material/day2-annotation)
+- [I-1. Variant Filtering](../class-material/day2-filtering.html)
+- [I-2. Variant Annotation](../class-material/day2-annotation.html)
 
 —- Coffee Break [10 mins] —
 
 ### II) Haplotype-aware analysis of genomic sequence reads
+- [II-1. Phasing sequence-based genotypes](../class-material/day2-phasing.html)
 
 —- Lunch Break [1:30 hr] —
 
