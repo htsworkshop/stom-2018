@@ -13,7 +13,7 @@ We will run single-variant score test with sex as covariate.
 > <pre>
 # Running association test
 rvtest --inVcf cis_ENSG00000077044.vcf --pheno ENSG00000077044.ped \
-	--covar ENSG00000077044.cov --covar-name SEX --out  output --single score </pre>
+	--covar ENSG00000077044.ped --covar-name SEX --out  output --single score </pre>
 Note that there are 15 EUR samples that are part of GEUVADIS cohort but not part of 1000G Phase 3 genotypes. These
 samples will be automatically removed from analyses due to genotypes missing.
 
