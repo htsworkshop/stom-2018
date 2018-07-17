@@ -34,8 +34,7 @@ We should extract sample IDs from EUR populations only (CEU, FIN, GBR, IBS, TSI)
 information for the anlaysis. This can be done with simple scripting (Perl or Python) but may be outside of the scope
 of this workshop, so I made a pre-generated phenotype file that can be used for the eQTL analysis:
 > <pre>
-cp ~/data/1000g/geuvadis/analysis_results/ENSG00000077044.ped .
-</pre>
+cp ~/data/1000g/geuvadis/analysis_results/ENSG00000077044.ped .  </pre>
 
 Now, let's prepare genotype file for the analysis. For simplicity, we will only analyze cis-eQTL regions of the gene. 
 This specific gene's genomic location is chr2:233,354,507-233,472,104 in GRCh38. We will extract +/- 1Mb from the genotype
@@ -43,8 +42,7 @@ file around the gene. We will use 1000 Genomes Project Phase 3 VCF.
 
 > <pre>
 tabix -h ~/data/1000g/panel/ALL.chr2.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz \
-	2:232354507-234472104 > cis_ENSG00000077044.vcf
-</pre>
+	2:232354507-234472104 > cis_ENSG00000077044.vcf </pre>
 
 Now we have genotype and phenotype files ready, so we can move on to the association analysis
 
