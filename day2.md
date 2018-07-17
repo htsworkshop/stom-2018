@@ -62,6 +62,7 @@ Goo Jun (GJ)
 —- Coffee Break [10 mins] —
 
 ### IV) Population-scale analysis of single-cell RNA-seq data
+- [IV-1. Example from retinal bipolar cell scRNA-seq study](../class-material/day2-single-cell.html)
 
 —- End/Wrap-Up —
 
@@ -69,17 +70,6 @@ Goo Jun (GJ)
 
 <!-- [Gene expression -->
 <!-- table](../class-material/GTEx_Analysis_v6p_RNA-seq_RNA-SeQCv1.1.8_gene_median_rpkm.gct.gz) -->
-
-
-### Reference material
-
-[CodeAcademy](https://www.codecademy.com/learn/python) An interactive online python tutorial for beginners
-
-[Python Quick Referene](http://rgruet.free.fr/)
-
-[Matplotlib Gallery](http://matplotlib.org/gallery.html)  
-
-[iPython Notebooks](http://ipython.org/notebook.html)
 
 <!--- files dont exist yet...
 [Slides-2.1]()
