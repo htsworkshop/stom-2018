@@ -25,12 +25,11 @@ run R
 ><pre>cd ~/
 mkdir --p ~/out/s8
 cd out/s8
-R</pre>
-
+R
 ls -l</pre>
 
 - First, install some packages that will be required for the analysis.
-><pre> install.packages(c("igraph","ggplot2","grid","Matrix","gmodels","RANN","reshape"))</pre>
+><pre> install.packages(c("ggplot2","grid","Matrix","gmodels","RANN","reshape"))</pre>
 It is recommended to select Korean (Seoul) download site when
 prompted.
 
