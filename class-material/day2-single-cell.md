@@ -7,8 +7,9 @@ layout: page
 ### IV-1. Single cell RNA-seq analysis examples
 
 WARNING: This step will consume >30GB of memory space, so it is
-impossible that everyone run this session simultaneously, so only a
-small number of people should run these steps during the practical
+impossible that everyone run this session simultaneously. Therefore,
+we will ask only a
+small number of people run these steps during the practical
 session, and each individual can practice these steps later on.
 
 These steps follows the excellent guide on single cell analysis
