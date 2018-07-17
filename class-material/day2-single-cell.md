@@ -29,12 +29,13 @@ R
 ls -l</pre>
 
 - First, install some packages that will be required for the analysis.
-><pre> install.packages(c("ggplot2","grid","Matrix","gmodels","RANN","reshape"))</pre>
+><pre>install.packages(c("ggplot2","grid","Matrix","gmodels","RANN","reshape"))</pre>
 It is recommended to select Korean (Seoul) download site when
 prompted.
 
 - Next, load the prepared data and R scripts
-><pre>load("~/data/10x/GSE81904_bipolar_data_Cell2016.Rdata")source("~/data/10x/class.R")</pre>
+><pre>load("~/data/10x/GSE81904_bipolar_data_Cell2016.Rdata")
+source("~/data/10x/class.R")</pre>
 
 - The dimensions of digital expression matrix is
 ><pre>dim(bipolar_dge) 
@@ -46,7 +47,7 @@ prompted.
 are likely to contain dead cells or reads with technical artifacts. We
 will filter out cells that has more than 10% of mitochondrial reads
 among the total reads.
-> <pre> mt.genes = grep("mt-", rownames(bipolar_dge), value = TRUE)
+> <pre>mt.genes = grep("mt-", rownames(bipolar_dge), value = TRUE)
 cells.use = colnames(bipolar_dge)[colSums(bipolar_dge[mt.genes, ])/colSums(bipolar_dge) < 0.1]
 bipolar_dge = bipolar_dge[, cells.use]
 dim(bipolar_dge) </pre>
@@ -73,8 +74,7 @@ produced, and they can be visualized as follows:
 data.plot = dsq.bip@tsne.y
 data.plot$group = dsq.bip@group
 pdf('tsne.pdf',width=8,height=5)
-ggplot(data.plot, aes(x = tSNE1, y = tSNE2)) + geom_point(aes(colour = factor(group), 
-size = 1)) + scale_color_hue(l = 55) + scale_size(range = c(1, 1)) + theme_bw() 
+ggplot(data.plot, aes(x = tSNE1, y = tSNE2)) + geom_point(aes(colour = factor(group), size = 1)) + scale_color_hue(l = 55) + scale_size(range = c(1, 1)) + theme_bw() 
 dev.off()</pre>
 
 - To show the gene expression for each individual gene, by
