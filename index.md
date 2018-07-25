@@ -35,7 +35,7 @@ basic UNIX skills (such as free contents material at
 
 **When:** July 25-26 (2018), 9:20 AM - 5:10 PM 
 
-**Where:** 221-202, Seoul National University, Kwanak-gu, Seoul, Korea.
+**Where:** 25-411, Seoul National University, Kwanak-gu, Seoul, Korea.
 
 <br>
 <hr>
