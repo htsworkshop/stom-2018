@@ -10,7 +10,7 @@ In this part, we will follow the best practice of TOPMed variant
 calling pipeline. We used a freeze of [vt software
 tool](https://github.com/hyunminkang/vt-topmed)
 and [cramore software
-tool](https://github.com/hyunminkang/apigenome) as of today.
+tool](https://github.com/hyunminkang/cramore) as of today.
 We will also use `samtools` and `bamUtil` software tools. 
 
 ---
@@ -19,18 +19,18 @@ We will also use `samtools` and `bamUtil` software tools.
 
 - We will first create another output directory, and check `REF_PATH` variable.
 > <pre>$ cd ~/
-$ mkdir --p out/s3.2
-$ cd out/s3.2
+$ mkdir --p stom2018/s3.2
+$ cd stom2018/s3.2
 $ env | grep REF_PATH
-REF_PATH=/BiO/home/kobic/data/ref/md5/%2s/%2s/%s </pre>
+REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
 
 - Using `xargs`, we process each sample sequentially with a single
   command:
-> <pre>$ ls ~/data/topmed/ | grep cram$ | cut -d . -f 1 | xargs -I {} \
-bash -c "samtools view -uh ~/data/topmed/{}.recab.cram \
-  chr20:10000000-10200000 2> /dev/null | bam clipOverlap --poolSize \
-  100000000 --in -.ubam --out -.ubam 2> /dev/null | vt discover2 -z -q \
-  20 -b + -r ~/data/ref/hs38DH.fa -s {} -o {}.bcf" </pre>
+> <pre>$ ls /ws_data/topmed/ | grep cram$ | cut -d . -f 1 | xargs -I {} \
+bash -c "samtools view -uh /ws_data/topmed/crams/{}.recab.chr20.cram \
+  chr20:10000000-10200000 2> /dev/null | bamUtil clipOverlap --poolSize \
+  100000000 --in -.ubam --out -.ubam 2> /dev/null | vt-topmed discover2 -z -q \
+  20 -b + -r /ws_data/ref/hs38DH.fa -s {} -o {}.bcf" </pre>
   
 - Then you will see six BCF files are created.
 > <pre>$ ls -l 
@@ -71,7 +71,7 @@ NWD684137.bcf</pre>
 
 - The merged site list can be further annotated and consolidated as
 follows:
-> <pre>$ vt annotate_indels -r ~/data/ref/hs38DH.fa merged.sites.bcf \
+> <pre>$ vt-topmed annotate_indels -r /ws_data/ref/hs38DH.fa merged.sites.bcf \
 -o + 2> /dev/null | vt consolidate_variants + -o union.sites.bcf </pre>
 
 - The union sites must be indexed.
@@ -85,15 +85,14 @@ follows:
   the path to the corresponding CRAM file for each sample at each
   line.
 > <pre>$ ls NWD*.bcf | cut -d . -f 1 | xargs -I {} \
-echo "{} /BiO/data/topmed/{}.recab.cram" > cramlist.txt 
+echo "{} /ws_data/topmed/crams/{}.recab.cram" > cramlist.txt 
 $ cat cramlist.txt
-NWD230091 /BiO/data/topmed/NWD230091.recab.cram
-NWD231092 /BiO/data/topmed/NWD231092.recab.cram
-NWD259170 /BiO/data/topmed/NWD259170.recab.cram
-NWD315403 /BiO/data/topmed/NWD315403.recab.cram
-NWD495157 /BiO/data/topmed/NWD495157.recab.cram
-NWD684137 /BiO/data/topmed/NWD684137.recab.cram</pre>
-_NOTE:_ For users 26-50, use `BiO2` instead of `BiO`. 
+NWD230091 /ws_data/topmed/crams/NWD230091.recab.cram
+NWD231092 /ws_data/topmed/crams/NWD231092.recab.cram
+NWD259170 /ws_data/topmed/crams/NWD259170.recab.cram
+NWD315403 /ws_data/topmed/crams/NWD315403.recab.cram
+NWD495157 /ws_data/topmed/crams/NWD495157.recab.cram
+NWD684137 /ws_data/topmed/crams/NWD684137.recab.cram</pre>
 
 - The joint genotyping can be performed by reaching each CRAM file
   sequentially.

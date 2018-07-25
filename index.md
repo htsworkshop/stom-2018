@@ -33,7 +33,7 @@ basic UNIX skills (such as free contents material at
 
 **Requirements:** Participants must bring a laptop with specific [software installed]({{ site.baseurl }}/setup/).
 
-**When:** July 16-17 (2018), 9:20 AM - 5:10 PM 
+**When:** July 25-26 (2018), 9:20 AM - 5:10 PM 
 
 **Where:** 221-202, Seoul National University, Kwanak-gu, Seoul, Korea.
 

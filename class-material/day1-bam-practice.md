@@ -18,7 +18,7 @@ generate 'analysis ready' SAM/BAM file to perform variant calling.
 genomic coordinates prior to variant detection. It can be achieved
 using `samtools sort` command.
 > <pre>
-samtools sort -o HG00406.sorted.bam HG00406.bwa.sam </pre>
+$ samtools sort -o HG00406.sorted.bam HG00406.bwa.sam </pre>
   * Q. Try `less HG00406.sorted.bam`. Can it be read as plain text file?
     Is the format of the output file SAM or BAM?
   * Q. Try `samtools view HG00406.sorted.bam | less -S`. Are the aligned
@@ -26,7 +26,7 @@ samtools sort -o HG00406.sorted.bam HG00406.bwa.sam </pre>
 	
 - The following command can be useful to count the number of reads
 aligned to each chromosome. 
-> <pre> samtools view HG00406.sorted.bam | cut -f 3 | uniq -c </pre>
+> <pre> $ samtools view HG00406.sorted.bam | cut -f 3 | uniq -c </pre>
   * Q. What does the command do? Can you interpret the output?
   * Q. Which chromosome contains the most of aligned reads?
   
@@ -34,9 +34,9 @@ aligned to each chromosome.
 sorting using `samtools sort` can be done jointly in one step,
 without having to store the SAM file.
 > <pre>
-bwa mem -t 2 -R '@RG\tID:HG00406_1KG_lowcov\tSM:HG00406\tLB:HG00406\tPL:ILLUMINA' \
-~/data/ref/hs38DH.fa ~/data/1000g/fastqs/HG00406.R1.fastq.gz \
-~/data/1000g/fastqs/HG00406.R2.fastq.gz | samtools sort -o HG00406.sorted.bam - </pre>
+$ bwa mem -t 2 -R '@RG\tID:HG00406_1KG_lowcov\tSM:HG00406\tLB:HG00406\tPL:ILLUMINA' \
+/ws_data/ref/hs38DH.fa /ws_data/1000g/fastqs/HG00406.R1.fastq.gz \
+/ws_data/1000g/fastqs/HG00406.R2.fastq.gz | samtools sort -o HG00406.sorted.bam - </pre>
   * Q. What would be the benefit of jointly running the command this way?
   * Q. How was UNIX pipe used to perform the task jointly?
   * Q. What was the difference in the arguments compared to when the
@@ -58,11 +58,11 @@ sorted sequence reads to be prepared for variant calling.
 - These steps can be performed jointly using a single command using
   `bamUtil` and `samtools` as follows:
 > <pre>
-bam dedup_lowmem --allReadNames --binCustom --binQualS \
+$ bamUtil dedup_lowmem --allReadNames --binCustom --binQualS \
 "0:2,3:3,4:4,5:5,6:6,7:10,13:20,23:30" --in HG00406.sorted.bam \
---recab --out -.ubam --refFile ~/data/ref/hs38DH.fa \
---dbsnp ~/data/ref/dbsnp_142.b38.vcf.gz | samtools view -h -C \
--T ~/data/ref/hs38DH.fa -o HG00406.recal.cram - </pre>
+--recab --out -.ubam --refFile /ws_data/ref/hs38DH.fa \
+--dbsnp /ws_data/ref/dbsnp_142.b38.vcf.gz | samtools view -h -C \
+-T /ws_data/ref/hs38DH.fa -o HG00406.recal.cram - </pre>
   * Q. What are the sizes of SAM file (right after `bwa mem`), and the
     sorted BAM file, and the final CRAM file? 
   * Q. How many folds of
@@ -88,7 +88,7 @@ bam dedup_lowmem --allReadNames --binCustom --binQualS \
      `--globalQScorePrior -1.0 --preserve_qscores_less_than 6
      --static_quantized_quals 10 --static_quantized_quals 20
      --static_quantized_quals 30 --disable_indel_quals`
-   4. Run `samtools view -C -T ~/data/ref/hs38DH.fa -o
+   4. Run `samtools view -C -T /ws_data/ref/hs38DH.fa -o
    [output_cram_file_name] [input_bam_file_name]` to convert the
    output BAM file into a CRAM file.
    
@@ -99,7 +99,7 @@ bam dedup_lowmem --allReadNames --binCustom --binQualS \
 - The analysis-ready CRAM file can be indexed using `samtools index`
   to enable random access at arbitrary genomic coordinate.
 > <pre>
-samtools index HG00406.recal.cram </pre>
+$ samtools index HG00406.recal.cram </pre>
 
 - Viewing the CRAM formatted file requires the knowledge of reference
   genome. Otherwise, the access will be very slow because it is trying
@@ -109,16 +109,16 @@ samtools index HG00406.recal.cram </pre>
 - One way to view the CRAM formated file is to include `-T [ref.fa]`
   when running `samtools view` as follows:
 ><pre>
-samtools view -T ~/data/ref/hs38DH.fa HG00406.recal.cram chr20:0 | less -S </pre>
+$ samtools view -T /ws_data/ref/hs38DH.fa HG00406.recal.cram chr20:0 | less -S </pre>
   
 - Alternatively, one can first set an enviroment variable specifying
   local repository of MD5 sum of each contig, using the following command:
 ><pre>
-export REF_PATH=~/data/ref/md5/%2s/%2s/%s </pre>
+$ export REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
 Then reading the CRAM file does not require `-T [ref.fa]` option
   without slowing things down. 
 ><pre>
-samtools view HG00406.recal.cram chr20:0 | less -S </pre>
+$ samtools view HG00406.recal.cram chr20:0 | less -S </pre>
   As this approach works better with other
   software tools beyong `samtools`, setting `REF_PATH` environment
   variable is a preferred approach. To ensure `REF_PATH` enviroment
@@ -126,7 +126,7 @@ samtools view HG00406.recal.cram chr20:0 | less -S </pre>
 ><pre> env | grep REF_PATH </pre>
 It should return the absolute path for `REF_PATH`, for example (varies
   by user), 
-><pre> REF_PATH=/BiO/home/kobic00/data/ref/md5/%2s/%2s/%s </pre>
+><pre> REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
 
 
 ---
@@ -139,7 +139,7 @@ using `samtools tview` or `IGV` tool. Here we explain how to use
 
 - To invoke `samtools tview`, you need to specify the aligned
 SAM/BAM/CRAM file and the reference FASTQ file as follows:
-> <pre> samtools tview HG00406.recal.cram ~/data/ref/hs38DH.fa </pre>
+> <pre> $ samtools tview HG00406.recal.cram /ws_data/ref/hs38DH.fa </pre>
 
 - Then it will show the beginning of chromosome 1, which does not have
   any aligned read. To move to chromosome 20, try the following steps:
@@ -157,7 +157,7 @@ SAM/BAM/CRAM file and the reference FASTQ file as follows:
   
 - To compare how invoke `samtools tview`, you need to specify the aligned
 SAM/BAM/CRAM file and the reference FASTQ file as follows:
-> <pre> samtools tview HG00406.recal.cram ~/data/ref/hs38DH.fa </pre>
+> <pre> $ samtools tview HG00406.recal.cram /ws_data/ref/hs38DH.fa </pre>
 You may repeat the steps 1-6 from above and tell what the major
 difference is.
   

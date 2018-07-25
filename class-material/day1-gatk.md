@@ -18,24 +18,24 @@ released on Jun 12, 2018.
 - We will first create a directory to store output files.
 > <pre>
 $ cd ~/
-$ mkdir --p out/s3.1 
-$ cd out/s3.1/ </pre>
+$ mkdir --p stom2018/s3.1 
+$ cd stom2018/s3.1/ </pre>
 
 - We will use the PUR trio deeply sequenced repeatedly from two
   different centers.
 > <pre>
-$ ls ~/data/topmed </pre>
+$ ls /ws_data/topmed/crams/ </pre>
 
 - Because they are CRAM files, it is important to set environment
   variable `REF_PATH`. 
 > <pre>
-$ export REF_PATH=~/data/ref/md5/%2s/%2s/%s 
+$ export REF_PATH=/ws_data/ref/md5/%2s/%2s/%s 
 $ env | grep REF_PATH </pre>
 
 - To list the sample IDs, we can combine our UNIX skill sets as
   follows:
 > <pre>
-$ ls ~/data/topmed/ | grep cram$ | cut -d . -f 1 
+$ ls /ws_data/topmed/crams | grep cram$ | cut -d . -f 1 
 NWD230091
 NWD231092
 NWD259170
@@ -47,18 +47,18 @@ Make sure that you observe the same output
 - You may use `xargs` to apply a series of command to each of these
   sample with a single command. For example,
 > <pre>
-$ ls ~/data/topmed/ | grep cram$ | cut -d . -f 1 | xargs -I {} ls -l ~/data/topmed/{}.recab.cram 
--rw-r--r-- 1 kobic kobic 38868223528 Jul 15 10:32 /BiO/home/kobic/data/topmed/NWD230091.recab.cram
--rw-r--r-- 1 kobic kobic 21030299096 Jul 15 11:04 /BiO/home/kobic/data/topmed/NWD231092.recab.cram
--rw-r--r-- 1 kobic kobic 22008268432 Jul 15 11:37 /BiO/home/kobic/data/topmed/NWD259170.recab.cram
--rw-r--r-- 1 kobic kobic 23927997911 Jul 15 12:14 /BiO/home/kobic/data/topmed/NWD315403.recab.cram
--rw-r--r-- 1 kobic kobic 23500707637 Jul 15 12:49 /BiO/home/kobic/data/topmed/NWD495157.recab.cram
--rw-r--r-- 1 kobic kobic 23135201299 Jul 15 13:24 /BiO/home/kobic/data/topmed/NWD684137.recab.cram </pre>
+$ ls /ws_data/topmed/crams/ | grep cram$ | cut -d . -f 1 | xargs -I {} ls -l /ws_data/topmed/crams/{}.recab.chr20.cram 
+-rw-rw-r-- 1 user1 user1 921367429  7월 25 19:59 /ws_data/topmed/crams/NWD230091.recab.chr20.cram
+-rw-rw-r-- 1 user1 user1 497682425  7월 25 19:56 /ws_data/topmed/crams/NWD231092.recab.chr20.cram
+-rw-rw-r-- 1 user1 user1 524656359  7월 25 19:56 /ws_data/topmed/crams/NWD259170.recab.chr20.cram
+-rw-rw-r-- 1 user1 user1 561420513  7월 25 19:57 /ws_data/topmed/crams/NWD315403.recab.chr20.cram
+-rw-rw-r-- 1 user1 user1 556571604  7월 25 19:57 /ws_data/topmed/crams/NWD495157.recab.chr20.cram
+-rw-rw-r-- 1 user1 user1 543732572  7월 25 19:57 /ws_data/topmed/crams/NWD684137.recab.chr20.cram</pre>
   * Q. Can you explain what the command did?
   
 - Another example of using `xargs`:
 > <pre>
-$ ls ~/data/topmed/ | grep cram$ | cut -d . -f 1 | xargs -I {} echo "My name is {}"
+$ ls /ws_data/topmed/crams/ | grep cram$ | cut -d . -f 1 | xargs -I {} echo "My name is {}"
 My name is NWD230091
 My name is NWD231092
 My name is NWD259170
@@ -78,9 +78,9 @@ will focus the 200kb region starting from 10Mb of chromosome 20.
 - Using `xargs`, we can run across all six samples with a single
 command.
 > <pre>
-$ ls ~/data/topmed/ | grep cram$ | cut -d . -f 1 | \
-xargs -I {} gatk HaplotypeCaller -R ~/data/ref/hs38DH.fa \
--I ~/data/topmed/{}.recab.cram \
+$ ls /ws_data/topmed/crams/ | grep cram$ | cut -d . -f 1 | \
+xargs -I {} gatk HaplotypeCaller -R /ws_data/ref/hs38DH.fa \
+-I /ws_data/topmed/crams/{}.recab.chr20.cram \
 -O {}.g.vcf.gz \
 -ERC GVCF \
 -L chr20:10000000-10200000 </pre>

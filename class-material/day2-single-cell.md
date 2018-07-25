@@ -23,8 +23,8 @@ available at
 - We will first need to set up directory to store output files, and
 run R
 ><pre>cd ~/
-mkdir --p ~/out/s8
-cd out/s8
+mkdir --p stom2018/s8
+cd stom2018/s8
 R
 ls -l</pre>
 
@@ -34,8 +34,8 @@ It is recommended to select Korean (Seoul) download site when
 prompted.
 
 - Next, load the prepared data and R scripts
-><pre>load("~/data/10x/GSE81904_bipolar_data_Cell2016.Rdata")
-source("~/data/10x/class.R")</pre>
+><pre>load("/ws_data/10x/GSE81904_bipolar_data_Cell2016.Rdata")
+source("/ws_data/10x/class.R")</pre>
 
 - The dimensions of digital expression matrix is
 ><pre>dim(bipolar_dge) 
@@ -64,7 +64,7 @@ violinplot(dsq.bip,c("num.genes","num.trans"))
 dev.off()</pre>
 
 - To copy the PDF file, type the following commnad from the terminal screen.
-><pre>scp kobic00@IP.AD.DR.ESS:out/s8/violin.pdf . </pre>
+><pre>scp -p 9001 username@IP.AD.DR.ESS:stom2018/s8/violin.pdf . </pre>
 
   
 #### c. Visualizing cells with t-SNE manifolds
@@ -85,7 +85,7 @@ gene.expression.scatter(dsq.bip, c("Prkca", "Glul","Scgn", "Grm6"))
 dev.off()</pre>
 
 - To copy the output PDF files, type the following commnad from the terminal screen.
-><pre>scp kobic00@IP.AD.DR.ESS:out/s8/*.pdf . </pre>
+><pre>scp -p 9001 username@IP.AD.DR.ESS:stom2018/s8/*.pdf . </pre>
 
 ---
 Feel free to ask questions to your instructor(s) if you are stuck. 

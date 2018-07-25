@@ -19,20 +19,20 @@ will 1Mb region instead of 200kb.
 
 - The GATK callset can be found at
 ><pre>
-ls -l ~/data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz</pre>
+ls -l /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz</pre>
 
 - The vt/cramore callset (based on TOPMed calling pipeline) can be
   found at
 ><pre>
-ls -l ~/data/topmed/PURtrio.at.joint.chr20.10Mb.11Mb.bcf</pre>  
+ls -l /ws_data/topmed/vcfs/PURtrio.at.joint.chr20.10Mb.11Mb.bcf</pre>  
 
 - Compare the basic summary statistics between the two BCF/VCF files
   using `bcftools stats' command:
 ><pre>
-bcftools stats ~/data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz
+bcftools stats /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz
   | less -S </pre>
 ><pre>
-bcftools stats ~/data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
+bcftools stats /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
   | less -S </pre>
   
   * Q. What are the differences between the two in terms of the total
@@ -53,7 +53,7 @@ bcftools stats ~/data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
   copied the site list from >65,000 subjects (from BRAVO variant
   browser). To see the summary of the file, try the following command:
 ><pre>bcftools view
-  ~/data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz | less -S</pre>
+  /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz | less -S</pre>
   * Q: How does the FILTER column look like? Can you explain what it
     means?
 
@@ -61,8 +61,8 @@ bcftools stats ~/data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
   package) to transfer the TOPMed 65k callset filter to our
   callset. First, let's create a directory for storing output
 ><pre>cd ~/
-mkdir --p out/s5.1
-cd out/s5.1</pre>
+mkdir --p stom2018/s5.1
+cd stom2018/s5.1</pre>
 
 - See how to use `vcf-apply-external-filer`, then type the command
 ><pre>vcf-apply-external-filter</pre>
@@ -72,15 +72,15 @@ or use the `-man option`
 - To apply the software to the GATK callset, use the following
   command:
 ><pre>vcf-apply-external-filter \
--vcf ~/data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
--ext ~/data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
+-vcf /ws_data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
+-ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.gatk.joint.chr20.10Mb.11Mb.filt.vcf.gz \
 --clear --region chr20:10000000-11000000</pre>
 
 - A similar command may be applied for `vt/cramore` callset.
 ><pre>vcf-apply-external-filter \
--vcf ~/data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
--ext ~/data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
+-vcf /ws_data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
+-ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.vt.joint.chr20.10Mb.11Mb.filt.bcf \
 --clear --region chr20:10000000-11000000</pre>
 

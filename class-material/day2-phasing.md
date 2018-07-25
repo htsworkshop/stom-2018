@@ -15,7 +15,7 @@ sequence-based genotype calls.
 
 - We will start with the vt/cramore variant calls from the previous
   session.
-><pre>cd ~/out/s5.1
+><pre>cd ~/stom2018/s5.1
 ls -l</pre>
 
 - We will focus on PASS-filtered genotypes to produce high-quality haplotypes.
@@ -42,7 +42,7 @@ PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.bcf | cut -f 10- \
 - We will first phase the genotypes using `eagle2` software tool, without
   using a reference panel.
 > <pre>eagle \
---geneticMapFile=$HOME/data/ref/genetic_map_hg38_withX.txt.gz \
+--geneticMapFile=/ws_data/ref/genetic_map_hg38_withX.txt.gz \
 --chrom=chr20 \
 --outPrefix=PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.phased_without_ref \
 --vcf PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.bcf </pre>
@@ -75,11 +75,11 @@ PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.phased_without_ref.vcf.gz \
 - We will phase the genotypes using `eagle2` software tool, by
   leveraging the 1000 Genomes reference panel.
 ><pre> eagle \
---geneticMapFile=$HOME/data/ref/genetic_map_hg38_withX.txt.gz \
+--geneticMapFile=/ws_data/ref/genetic_map_hg38_withX.txt.gz \
 --chrom=chr20 \
 --outPrefix=PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.phased_with_ref\
 --vcfTarget PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.bcf \
---vcfRef $HOME/data/1000g/panel/ALL.chr20_GRCh38.genotypes.20170504.bcf \
+--vcfRef /ws_data/1000g/panel/ALL.chr20_GRCh38.genotypes.20170504.bcf \
 --bpStart 10000000 --bpEnd 11000000</pre>
 
 - Agin, to see the phased haplotypes only, try

@@ -1,57 +1,13 @@
-# web-2017
-## Biocomputing bootcamp website for 2017
+# stom-2018
+## STOM HTS workshop website for 2018
 
-See: http://bioboot.github.io/web-2017/
+See: https://htsworkshop.github.io/stom-2018/
 
 **Overview:** This is a simple [jekell based static site](http://jekyllrb.com/docs/home/). To view locally on your own machine (i.e. before pushing or submitting a pull 
-request to this [bioboot GitHub](https://github.com/bioboot/web-2017) repo) 
+request to this [htsworkshop GitHub](https://htsworkshop.github.io/stom-2018/) repo) 
 you will need to have the **jekyll** and **github-pages** gem setup (see further 
 below for full instructions)
 
-
-### Roll forward instructions...
-
-To roll forward for a new years class follow the steps below (assuming you already have **jekyll** and **github-pages** 
-setup on your local machine):
-
-Git clone old site to a new dir
-
-  	cd ~/Dropbox/Teaching
-  	mkdir Bootcamp_2017
-  	cd Bootcamp_2017
-  	git clone git@github.com:bioboot/web-2016.git web-2017
-  	cd web-2017/
-  
-Update `_config.yml` and `index.md`. IN particular, rembember to change the dates and the pre-course questionnaire and post-course evaluation forms. Go through the regular `git add`, `git commit -m` cycle. But don’t yet push to GitHub (as we will want a new repo for this years class).
-  
-
-On GitHub make a new repo (Use the “+” sign and name it `web-2017` to match your local directory name. This name matching is purely for convenience).
-
-Then on the local machine change your remotes to point to this new repo.
-
-  	git remotes -v   
-  	git remote rm origin  
-
-Now add our new repo and push changes:  
-
-  	git remote add origin git@github.com:bioboot/web-2017.git  
-  	git push -u origin gh-pages  
-
-Then preview your new site online: https://bioboot.github.io/web-2017/ and visit the repo itself to see if everything is ship-shape: https://github.com/bioboot/web-2017  
-
-
-### Biocomputing bootcamp website for 2016 
-
-See: http://bioboot.github.io/web-2016/  asnd 2015 site setup details below.
-
-
-### Biocomputing bootcamp website for 2015, 
-
-See: http://bioboot.github.io/web-2015/ This is a simple [jekell based static site](http://jekyllrb.com/docs/home/). 
-
-To view locally on your own machine (i.e. before pushing or submitting a pull 
-request to this [bioboot GitHub](https://github.com/bioboot/web-2015) repo) 
-you will need to have the **jekyll** and **github-pages** gem setup, i.e.:
 
 Consider updating RubyGems first (likely need sudo for these).
 
@@ -74,13 +30,13 @@ However, most likely you will want to leave most of these alone and just add
 content to the day{2,3,4,5}.md files and create new files in the **class-material/** 
 directory (i.e. add lecture slides, handouts, cheat-sheets etc.)
 
-Please remember that all content is on the **gh-pages** branch! 
+Please remember that all content is on the **master** branch! 
 So you will want to be working on this branch and push back to this branch.
 
 A typical workflow for folks that have been added as **"Collaborators"** would look something like this:
 
 	## One time only clone
-	git clone https://github.com/bioboot/web-2015.git
+	git clone https://github.com/htsworkshop/stom-2018.git
 	cd web-2015
 
 	## Edit your files (e.g. day2.md)
@@ -90,13 +46,13 @@ A typical workflow for folks that have been added as **"Collaborators"** would l
 	jekyll serve
 
 	## Pull recent changes
-	git pull origin gh-pages
+	git pull origin master
 
 	## Stage, commit and push your changes
 	git status
 	git add day2.md
 	git commit -m "Your msg about changes"
-	git push origin gh-pages
+	git push origin master
 
 
 ## How this site was built
