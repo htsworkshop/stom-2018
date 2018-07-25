@@ -19,16 +19,9 @@ discordant read pairs in BAM format, so we will use BAM files from TOPMed whole 
 samples. The BAM versions of a 1-Mbp region (chr22:36,000,000-37,000,000) are generated at
 
 > <pre>
-# Server 1
-/BiO/data/topmed/bams
-# Server 2
-/BiO2/data/topmed/bams </pre>
+/ws_data/topmed/bams</pre>
 
-- These BAMs are generated from original CRAM files using samtools:
-
-> <pre>
-samtools view -h -b NWD230091.recab.cram chr22:36000000-37000000  > NWD230091.bam
-samtools index NWD230091.bam</pre>
+- These BAMs are generated from original CRAM files using ```samtools view -h -b``` commands.
 
 - There are six (6) BAM files in the directory. 
  
@@ -39,11 +32,7 @@ to the BAM files directory under the project directory.
 # From your home directory
 mkdir sv
 cd sv
-# If you are using Server 1 (i.e. your home directory is under /BiO/home)
-ln -s /BiO/data/topmed/bams bams 
-# If you are using Server 2 (i.e. your home directory is under /BiO2/home)
-ln -s /BiO2/data/topmed/bams bams </pre>
-
+ln -s /ws_data/topmed/bams bams</pre>
 
 #### b. Split reads and discordant read pairs
 
@@ -60,28 +49,32 @@ BAM files which will bypass SAMBLASTER extraction for faster analysis.
 If you have not yet aligned your data, you can generate these additional data 
 with [SpeedSeq](https://github.com/cc2qe/speedseq), which
 performs BWA-MEM alignment, marks duplicates and extracts split and discordant
-read-pairs. For example, 
-
-> <pre>
+read-pairs. For example,  
+```
+# DO NOT RUN THIS, THIS IS JUST AN EXAMPLE
 speedseq align -R "@RG\tID:id\tSM:sample\tLB:lib" \
     human_g1k_v37.fasta \
     sample.1.fq \
-    sample.2.fq </pre>
+    sample.2.fq 
+```
 
 Otherwise, split-read and discordant read pair data may be generated from BAM/CRAM files 
 already aligned with BWA-MEM.
-
-> <pre>
+```
+# DO NOT RUN THIS, THIS IS JUST AN EXAMPLE
 # Extract the discordant paired-end alignments.
-samtools view -b -F 1294 sample.bam |samtools sort - > sample.discordants.bam </pre>
+samtools view -b -F 1294 sample.bam |samtools sort - > sample.discordants.bam 
+```
 
-> <pre>
+```
+# DO NOT RUN THIS, THIS IS JUST AN EXAMPLE
 # Extract the split-read alignments
 samtools view -h sample.bam \
-    | /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin \
+    | extractSplitReads_BwaMem -i stdin \
     | samtools view -Sb - \
     | samtools sort -  \
-	> sample.splitters.bam </pre>
+	> sample.splitters.bam
+```
 
 - Generate discordant read pair BAM files
 > <pre>
@@ -95,12 +88,12 @@ samtools view -b -F 1294 bams/NWD684137.bam |samtools sort - > NWD684137.discord
 
 - Generate split read BAM files
 > <pre>
-samtools view -h bams/NWD230091.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD230091.splitter.bam
-samtools view -h bams/NWD231092.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD231092.splitter.bam
-samtools view -h bams/NWD259170.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD259170.splitter.bam
-samtools view -h bams/NWD315403.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD315403.splitter.bam
-samtools view -h bams/NWD495157.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD495157.splitter.bam
-samtools view -h bams/NWD684137.bam| /BiO/apps/bin/scripts/extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD684137.splitter.bam</pre>
+samtools view -h bams/NWD230091.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD230091.splitter.bam
+samtools view -h bams/NWD231092.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD231092.splitter.bam
+samtools view -h bams/NWD259170.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD259170.splitter.bam
+samtools view -h bams/NWD315403.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD315403.splitter.bam
+samtools view -h bams/NWD495157.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD495157.splitter.bam
+samtools view -h bams/NWD684137.bam| extractSplitReads_BwaMem -i stdin|samtools view -Sb - |samtools sort - > NWD684137.splitter.bam</pre>
 
 * Q. Open one of the discordant read pair BAM files. What do you recognize?
 * Q. Open one of the split read BAM files. What do you recognize?
