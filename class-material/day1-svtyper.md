@@ -60,7 +60,7 @@ You can use [IGV (Integrative Genome Viewer)](https://software.broadinstitute.or
 Now, download BAM file using scp (Mac/Linux/Cygwin command-line). 
 
 > <pre>
-scp (your account)@SERVER.IP.ADD.RESS:~/sv/bams/NWD231092.bam* .  </pre>
+scp -P 9001 (your account)@SERVER.IP.ADD.RESS:~/sv/bams/NWD231092.bam* .  </pre>
 
 If you do not have command-line scp on your Windows laptop, you can use [WinSCP](https://winscp.net).
 

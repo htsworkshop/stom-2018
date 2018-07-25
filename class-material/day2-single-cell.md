@@ -64,7 +64,7 @@ violinplot(dsq.bip,c("num.genes","num.trans"))
 dev.off()</pre>
 
 - To copy the PDF file, type the following commnad from the terminal screen.
-><pre>scp -p 9001 username@IP.AD.DR.ESS:stom2018/s8/violin.pdf . </pre>
+><pre>scp -P 9001 username@IP.AD.DR.ESS:stom2018/s8/violin.pdf . </pre>
 
   
 #### c. Visualizing cells with t-SNE manifolds
@@ -85,7 +85,7 @@ gene.expression.scatter(dsq.bip, c("Prkca", "Glul","Scgn", "Grm6"))
 dev.off()</pre>
 
 - To copy the output PDF files, type the following commnad from the terminal screen.
-><pre>scp -p 9001 username@IP.AD.DR.ESS:stom2018/s8/*.pdf . </pre>
+><pre>scp -P 9001 username@IP.AD.DR.ESS:stom2018/s8/*.pdf . </pre>
 
 ---
 Feel free to ask questions to your instructor(s) if you are stuck. 
