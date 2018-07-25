@@ -36,14 +36,14 @@ SnpEff includes options to select different databases (species, reference build,
 
 > <pre>
 # Checking list of databases supported by the current version of SnpEff
-java -jar /BiO/apps/snpEff/snpEff.jar databases | less
+java -jar /ws_data/bin/snpEff/snpEff.jar databases | less
 # We need GRCh38 for our VCF file, so check out which versions are included
-java -jar /BiO/apps/snpEff/snpEff.jar databases | grep GRCh38 </pre>
+java -jar /ws_data/bin/snpEff/snpEff.jar databases | grep GRCh38 </pre>
 
 We will use Ensenble version of GRCh38 database, GRCh38.86
 
 > <pre>
-java -Xmx8g -jar /BiO/apps/snpEff/snpEff.jar GRCh38.86 ALL.chr20_GRCh38.part.sites.vcf > ALL.chr20_GRCh38.part.annotated.sites.vcf 
+java -Xmx8g -jar /ws_data/bin/snpEff/snpEff.jar GRCh38.86 ALL.chr20_GRCh38.part.sites.vcf > ALL.chr20_GRCh38.part.annotated.sites.vcf 
 less -S ALL.chr20_GRCh38.part.annotated.sites.vcf</pre>
 
 - Q. How many STOP-GAIN variants exist in this VCF?
