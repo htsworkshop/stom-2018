@@ -2,12 +2,12 @@
 layout: page
 ---
 
-# Introduction to KOGO HTS Workshop 2018
+# Introduction to STOM HTS Workshop 2018
 
 <hr>
 <br>
 
-**Overview:** This hands-on sessions introduce students of KOGO HTS
+**Overview:** This hands-on sessions introduce students of STOM HTS
 workshop to computational tools, techniques, and best practices for
 analyzing high-throughput sequence data in population scale.
 
