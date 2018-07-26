@@ -66,7 +66,7 @@ NWD495157.bcf
 NWD684137.bcf</pre>
 
 - Then we can create a merged site list using the following command:
-> <pre>$ cramore vcf-merge-candidate-variants --in-vcf-list bcflist.txt \
+> <pre>$ cramore2 vcf-merge-candidate-variants --in-vcf-list bcflist.txt \
 --out-vcf merged.sites.bcf --region chr20:10000000-10200000</pre>
 
 - The merged site list can be further annotated and consolidated as
@@ -96,7 +96,7 @@ NWD684137 /ws_data/topmed/crams/NWD684137.recab.cram</pre>
 
 - The joint genotyping can be performed by reaching each CRAM file
   sequentially.
-> <pre>$ cramore dense-genotype --in-cram-list cramlist.txt \
+> <pre>$ cramore2 dense-genotype --in-cram-list cramlist.txt \
 --in-vcf union.sites.bcf --region chr20:10000000-10200000 \
 --out PURtrio.joint.bcf </pre>
 

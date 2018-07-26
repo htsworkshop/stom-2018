@@ -27,7 +27,7 @@ PURtrio.vt.joint.chr20.10Mb.11Mb.filt.bcf</pre>
 - We will extract genotypes only, setting genotypes with depth less
   than 10 as missing.
 ><pre>
-cramore vcf-squeeze --minDP 10 \
+cramore2 vcf-squeeze --minDP 10 \
 --in PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.bcf \
 --out PURtrio.vt.joint.chr20.10Mb.11Mb.filt.PASS.minDP10.bcf</pre>
 
