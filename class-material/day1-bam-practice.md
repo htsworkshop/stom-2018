@@ -58,7 +58,7 @@ sorted sequence reads to be prepared for variant calling.
 - These steps can be performed jointly using a single command using
   `bamUtil` and `samtools` as follows:
 > <pre>
-$ bamUtil dedup_lowmem --allReadNames --binCustom --binQualS \
+$ bamUtil dedup_lowmem --binCustom --binQualS \
 "0:2,3:3,4:4,5:5,6:6,7:10,13:20,23:30" --in HG00406.sorted.bam \
 --recab --out -.ubam --refFile /ws_data/ref/hs38DH.fa \
 --dbsnp /ws_data/ref/dbsnp_142.b38.vcf.gz | samtools view -h -C \
@@ -157,7 +157,7 @@ SAM/BAM/CRAM file and the reference FASTQ file as follows:
   
 - To compare how invoke `samtools tview`, you need to specify the aligned
 SAM/BAM/CRAM file and the reference FASTQ file as follows:
-> <pre> $ samtools tview HG00406.recal.cram /ws_data/ref/hs38DH.fa </pre>
+> <pre> $ samtools tview /ws_data/topmed/crams/NWD315403.recab.chr20.cram /ws_data/ref/hs38DH.fa </pre>
 You may repeat the steps 1-6 from above and tell what the major
 difference is.
   
