@@ -21,8 +21,7 @@ We will also use `samtools` and `bamUtil` software tools.
 > <pre>$ cd ~/
 $ mkdir --p stom2018/s3.2
 $ cd stom2018/s3.2
-$ env | grep REF_PATH
-REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
+$ export REF_PATH=~/md5/%2s/%2s/%s </pre>
 
 - Using `xargs`, we process each sample sequentially with a single
   command:
