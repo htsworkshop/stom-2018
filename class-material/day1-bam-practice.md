@@ -114,7 +114,8 @@ $ samtools view -T /ws_data/ref/hs38DH.fa HG00406.recal.cram chr20:0 | less -S <
 - Alternatively, one can first set an enviroment variable specifying
   local repository of MD5 sum of each contig, using the following command:
 ><pre>
-$ export REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
+$ seq_cache_populate.pl --root ~/md5 /ws_data/ref/hs38DH.fa
+$ export REF_PATH=~/md5/%2s/%2s/%s </pre>
 Then reading the CRAM file does not require `-T [ref.fa]` option
   without slowing things down. 
 ><pre>
