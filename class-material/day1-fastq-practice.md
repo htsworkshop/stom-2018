@@ -121,7 +121,7 @@ $ less HG00406.bwa.sam </pre>
 - Or viewing the header can be skipped if read with `samtools view`
 without any option
 > <pre>
-$ samtools view HG00405.bwa.sam | less -S
+$ samtools view HG00406.bwa.sam | less -S
   * Q. Can you tell which column represents which?
   * Q. Is the output SAM file sorted by genomic coordinate or not? How
     can you tell?
