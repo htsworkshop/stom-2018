@@ -72,7 +72,7 @@ NWD684137.bcf</pre>
 - The merged site list can be further annotated and consolidated as
 follows:
 > <pre>$ vt-topmed annotate_indels -r /ws_data/ref/hs38DH.fa merged.sites.bcf \
--o + 2> /dev/null | vt consolidate_variants + -o union.sites.bcf </pre>
+-o + 2> /dev/null | vt-topmed consolidate_variants + -o union.sites.bcf </pre>
 
 - The union sites must be indexed.
 > <pre>$ bcftools index union.sites.bcf</pre>
