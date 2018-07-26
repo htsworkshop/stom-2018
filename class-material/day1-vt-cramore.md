@@ -85,14 +85,14 @@ follows:
   the path to the corresponding CRAM file for each sample at each
   line.
 > <pre>$ ls NWD*.bcf | cut -d . -f 1 | xargs -I {} \
-echo "{} /ws_data/topmed/crams/{}.recab.cram" > cramlist.txt 
+echo "{} /ws_data/topmed/crams/{}.recab.chr20.cram" > cramlist.txt 
 $ cat cramlist.txt
-NWD230091 /ws_data/topmed/crams/NWD230091.recab.cram
-NWD231092 /ws_data/topmed/crams/NWD231092.recab.cram
-NWD259170 /ws_data/topmed/crams/NWD259170.recab.cram
-NWD315403 /ws_data/topmed/crams/NWD315403.recab.cram
-NWD495157 /ws_data/topmed/crams/NWD495157.recab.cram
-NWD684137 /ws_data/topmed/crams/NWD684137.recab.cram</pre>
+NWD230091 /ws_data/topmed/crams/NWD230091.recab.chr20.cram
+NWD231092 /ws_data/topmed/crams/NWD231092.recab.chr20.cram
+NWD259170 /ws_data/topmed/crams/NWD259170.recab.chr20.cram
+NWD315403 /ws_data/topmed/crams/NWD315403.recab.chr20.cram
+NWD495157 /ws_data/topmed/crams/NWD495157.recab.chr20.cram
+NWD684137 /ws_data/topmed/crams/NWD684137.recab.chr20.cram</pre>
 
 - The joint genotyping can be performed by reaching each CRAM file
   sequentially.
