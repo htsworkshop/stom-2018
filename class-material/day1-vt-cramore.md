@@ -26,7 +26,7 @@ REF_PATH=/ws_data/ref/md5/%2s/%2s/%s </pre>
 
 - Using `xargs`, we process each sample sequentially with a single
   command:
-> <pre>$ ls /ws_data/topmed/ | grep cram$ | cut -d . -f 1 | xargs -I {} \
+> <pre>$ ls /ws_data/topmed/crams/ | grep cram$ | cut -d . -f 1 | xargs -I {} \
 bash -c "samtools view -uh /ws_data/topmed/crams/{}.recab.chr20.cram \
   chr20:10000000-10200000 2> /dev/null | bamUtil clipOverlap --poolSize \
   100000000 --in -.ubam --out -.ubam 2> /dev/null | vt-topmed discover2 -z -q \
