@@ -57,28 +57,28 @@ bcftools stats /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
   * Q: How does the FILTER column look like? Can you explain what it
     means?
 
-- We will use `vcf-apply-external-filter` software (from `apigenome`
+- We will use `vcf-apply-external-filter2` software (from `apigenome`
   package) to transfer the TOPMed 65k callset filter to our
   callset. First, let's create a directory for storing output
 ><pre>cd ~/
 mkdir --p stom2018/s5.1
 cd stom2018/s5.1</pre>
 
-- See how to use `vcf-apply-external-filer`, then type the command
-><pre>vcf-apply-external-filter</pre>
+- See how to use `vcf-apply-external-filer2`, then type the command
+><pre>vcf-apply-external-filter2</pre>
 or use the `-man option`
-><pre>vcf-apply-external-filter -man</pre>
+><pre>vcf-apply-external-filter2 -man</pre>
 
 - To apply the software to the GATK callset, use the following
   command:
-><pre>vcf-apply-external-filter \
+><pre>vcf-apply-external-filter2 \
 -vcf /ws_data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
 -ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.gatk.joint.chr20.10Mb.11Mb.filt.vcf.gz \
 --clear --region chr20:10000000-11000000</pre>
 
 - A similar command may be applied for `vt/cramore` callset.
-><pre>vcf-apply-external-filter \
+><pre>vcf-apply-external-filter2 \
 -vcf /ws_data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
 -ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.vt.joint.chr20.10Mb.11Mb.filt.bcf \
