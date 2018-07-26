@@ -29,7 +29,7 @@ $ ls /ws_data/topmed/crams/ </pre>
 - Because they are CRAM files, it is important to set environment
   variable `REF_PATH`. 
 > <pre>
-$ export REF_PATH=/ws_data/ref/md5/%2s/%2s/%s 
+$ export REF_PATH=~/md5/%2s/%2s/%s 
 $ env | grep REF_PATH </pre>
 
 - To list the sample IDs, we can combine our UNIX skill sets as
