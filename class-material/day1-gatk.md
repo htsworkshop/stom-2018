@@ -129,7 +129,7 @@ $ du -sh PURtrio/
 - The joint genotyping can be performed using the GenomicsDB, without
 requiring any other parameters, as follows:
 > <pre>$ gatk GenotypeGVCFs \
--R ~/data/ref/hs38DH.fa \
+-R /ws_data/ref/hs38DH.fa \
 -V gendb://PURtrio \
 -O PURtrio.joint.vcf.gz \
 -L chr20:10000000-10200000 </pre>
