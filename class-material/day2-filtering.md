@@ -24,7 +24,7 @@ ls -l /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz</pre>
 - The vt/cramore callset (based on TOPMed calling pipeline) can be
   found at
 ><pre>
-ls -l /ws_data/topmed/vcfs/PURtrio.at.joint.chr20.10Mb.11Mb.bcf</pre>  
+ls -l /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf</pre>  
 
 - Compare the basic summary statistics between the two BCF/VCF files
   using `bcftools stats' command:
