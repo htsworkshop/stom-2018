@@ -29,10 +29,12 @@ ls -l /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf</pre>
 - Compare the basic summary statistics between the two BCF/VCF files
   using `bcftools stats' command:
 ><pre>
-bcftools stats /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz
+bcftools stats \
+  /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
   | less -S </pre>
 ><pre>
-bcftools stats /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf
+bcftools stats \
+  /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
   | less -S </pre>
   
   * Q. What are the differences between the two in terms of the total
@@ -72,14 +74,14 @@ or use the `-man option`
 - To apply the software to the GATK callset, use the following
   command:
 ><pre>vcf-apply-external-filter2 \
--vcf /ws_data/topmed/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
+-vcf /ws_data/topmed/vcfs/PURtrio.gatk.joint.chr20.10Mb.11Mb.vcf.gz \
 -ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.gatk.joint.chr20.10Mb.11Mb.filt.vcf.gz \
 --clear --region chr20:10000000-11000000</pre>
 
 - A similar command may be applied for `vt/cramore` callset.
 ><pre>vcf-apply-external-filter2 \
--vcf /ws_data/topmed/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
+-vcf /ws_data/topmed/vcfs/PURtrio.vt.joint.chr20.10Mb.11Mb.bcf \
 -ext /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz \
 -out PURtrio.vt.joint.chr20.10Mb.11Mb.filt.bcf \
 --clear --region chr20:10000000-11000000</pre>
