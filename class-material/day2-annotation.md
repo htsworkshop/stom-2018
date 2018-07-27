@@ -15,13 +15,13 @@ In this part, we will use SnpEff to annotate list of variants in a VCF file.
 For annotation, we do not need 'genotype' fields of VCF, which could be quite large depending on
 the sample size. It is more efficient to make 'site-only' VCF by cutting first 8 columns.
 
-We will use 1000 Genomes Project's chr20 VCF file at ```data/1000g/panel/```
+We will use 1000 Genomes Project's chr20 VCF file at ```/ws_data/1000g/panel/```
 
 > <pre>
-ls data/1000g/panel/
+ls /ws_data/1000g/panel/
 # We will use the ALL.chr20_GRCh38.genotypes.20170504.vcf.gz file 
 # Because this VCF file contains ~1.8M variants, we will extract only small region
-tabix -h data/1000g/panel/ALL.chr20_GRCh38.genotypes.20170504.vcf.gz 20:10000000-15000000 \
+tabix -h /ws_data/1000g/panel/ALL.chr20_GRCh38.genotypes.20170504.vcf.gz 20:10000000-15000000 \
 	|cut -f 1-8 > ALL.chr20_GRCh38.part.sites.vcf
 less ALL.chr20_GRCh38.part.sites.vcf 
 grep -v ^# ALL.chr20_GRCh38.part.sites.vcf | wc -l</pre>
