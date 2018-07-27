@@ -54,7 +54,7 @@ bcftools stats \
   large-scale sequencing studies, such as TOPMed, could be helpful. We
   copied the site list from >65,000 subjects (from BRAVO variant
   browser). To see the summary of the file, try the following command:
-><pre>bcftools view
+><pre>bcftools view \
   /ws_data/bravo/chr20.TOPMed_freeze5_bravo_62784.vcf.gz | less -S</pre>
   * Q: How does the FILTER column look like? Can you explain what it
     means?
