@@ -27,7 +27,7 @@ grep -vw NA output.SingleScore.assoc |sort -k13g|head -20 </pre>
 
 In fact, this gene, _DGKD_, has been selected based on the GEUVADIS paper's figure:
 
-![](DGKD.png | width=600)
+![](DGKD.png)
 
 
 Let's find out which SNP is rs838705 and rs21966773 from the VCF file.
